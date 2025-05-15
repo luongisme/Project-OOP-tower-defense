@@ -1,11 +1,11 @@
-package main;
+package Main;
 
 
-import Scenes.Menu;
-import Scenes.Playing;
-import Scenes.Settings;
-import inputs.KeyboardListener;
-import inputs.MyMouseListener;
+import Scene.Menu;
+import Scene.Playing;
+import Scene.Settings;
+import Input.KeyboardListener;
+import Input.MyMouseListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

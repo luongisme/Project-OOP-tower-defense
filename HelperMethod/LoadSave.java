@@ -1,4 +1,4 @@
-package helperMethods;
+package HelperMethod;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

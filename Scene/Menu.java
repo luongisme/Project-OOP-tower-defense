@@ -1,6 +1,6 @@
 package Scene;
 
-import main.Game;
+import Main.Game;
 
 import javax.imageio.ImageIO;
 

@@ -1,9 +1,9 @@
 package Scene;
 
-import helperMethods.LevelBuild;
-import main.Game;
-import managers.TileManager;
-import objects.Tile;
+import HelperMethod.LevelBuild;
+import Main.Game;
+import Tile.TileManager;
+import Tile.Tile;
 
 import java.awt.*;
 

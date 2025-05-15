@@ -1,12 +1,12 @@
-package inputs;
+package Input;
 
-import main.GameStates;
+import Main.GameStates;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static main.GameStates.*;
-import main.GameStates;
+import static Main.GameStates.*;
+import Main.GameStates;
 public class KeyboardListener implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
