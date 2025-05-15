@@ -1,15 +1,15 @@
 package UI;
 
-import Scenes.Playing;
-import main.Game;
-import objects.Tile;
+import Scene.Playing;
+import Main.Game;
+import Tile.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static main.GameStates.MENU;
-import static main.GameStates.SetGameState;
+import static Main.GameStates.MENU;
+import static Main.GameStates.SetGameState;
 
 public class BottomBar {
     private int x, y , width, height;

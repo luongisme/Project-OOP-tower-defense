@@ -1,4 +1,4 @@
-package Scenes;
+package Scene;
 
 import java.awt.*;
 

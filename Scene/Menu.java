@@ -1,16 +1,17 @@
-package Scenes;
+package Scene;
 
 import UI.MyButton;
-import main.Game;
+import Main.Game;
 
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
-import static main.GameStates.*;
+import static Main.GameStates.*;
 
 public class Menu extends GameScene implements SceneMethods{
     private BufferedImage img;

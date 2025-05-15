@@ -1,9 +1,12 @@
-package main;
+package Main;
 
-import inputs.KeyboardListener;
-import inputs.MyMouseListener;
+import Input.KeyboardListener;
+import Input.MyMouseListener;
 
 import javax.swing.*;
+
+import Main.Game;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

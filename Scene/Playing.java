@@ -1,16 +1,16 @@
-package Scenes;
+package Scene;
 
 import UI.BottomBar;
 import UI.MyButton;
-import helperMethods.LevelBuild;
-import main.Game;
-import managers.TileManager;
-import objects.Tile;
+import HelperMethod.LevelBuild;
+import Main.Game;
+import Tile.TileManager;
+import Tile.Tile;
 
 import java.awt.*;
 
-import static main.GameStates.MENU;
-import static main.GameStates.SetGameState;
+import static Main.GameStates.MENU;
+import static Main.GameStates.SetGameState;
 
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;

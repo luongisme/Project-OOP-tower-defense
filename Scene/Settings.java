@@ -1,12 +1,12 @@
-package Scenes;
+package Scene;
 
 import UI.MyButton;
-import main.Game;
+import Main.Game;
 
 import java.awt.*;
 
-import static main.GameStates.MENU;
-import static main.GameStates.SetGameState;
+import static Main.GameStates.MENU;
+import static Main.GameStates.SetGameState;
 
 public class Settings extends GameScene implements SceneMethods{
     private MyButton bMenu;

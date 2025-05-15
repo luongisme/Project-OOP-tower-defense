@@ -1,7 +1,7 @@
 package Tile;
 
-import helperMethods.LoadSave;
-import objects.Tile;
+import HelperMethod.LoadSave;
+import Tile.Tile;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

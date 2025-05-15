@@ -1,6 +1,6 @@
-package Scenes;
+package Scene;
 
-import main.Game;
+import Main.Game;
 
 public class GameScene {
     private Game game;

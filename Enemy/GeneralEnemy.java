@@ -10,8 +10,13 @@ public abstract  class GeneralEnemy {
     protected boolean reachEnd;
     protected int barWidth;// only modify barwidth if the enemy get hit
     protected int barLength=5;
+    protected Direction firstDirection;
 
     protected Rectangle hitbox;
+
+    public enum Direction{
+        UP, DOWN, LEFT, RIGHT
+    }
 
     public GeneralEnemy(int hp, int speed){
         this.hp=hp;
@@ -21,7 +26,7 @@ public abstract  class GeneralEnemy {
         this.reachEnd=false;
         this.barWidth=4*hp;
         this.hitbox= new Rectangle();
+        this.firstDirection=Direction.RIGHT;//when the game start, the enemy set default to go right
     }
-
 
 }
