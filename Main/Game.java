@@ -60,7 +60,6 @@ public class Game extends JFrame implements Runnable {
 
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
-
         addKeyListener(keyboardListener);
 
         requestFocus();//focus on particular component, make sure no weird bugs(no much need bc of JFrame and JPanel)
