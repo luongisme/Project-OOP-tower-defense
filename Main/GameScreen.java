@@ -12,12 +12,9 @@ public class GameScreen extends JPanel {
     private Dimension size;
 
 
-
     public GameScreen(Game game) {
         this.game = game;
         setPanelSize();
-
-
     }
 
     private void setPanelSize() {
