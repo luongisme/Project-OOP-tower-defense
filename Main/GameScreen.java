@@ -52,11 +52,6 @@ public class GameScreen extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         game.getRender().render(g);
-        //g.drawImage(sprites.get(19), 0, 0 , null); // equal to g.drawImage(img.getSubimage(32 * 9, 32, 32, 32), 0, 0, null);
-        //g.drawImage(img.getSubimage(32 * 9, 32, 32, 32), 0, 0, null);
-        //g.drawRect(50 , 50, 100, 100);
-        //g.fillRect(0,0,32,32);//at x = 0, y = 0, width = 32(ngang), 32(doc) = 1 pixel at (0,0)
-        //g.fillRect(32,0,32,32);//x=32 => cach 1 pixel
     }
 
 }

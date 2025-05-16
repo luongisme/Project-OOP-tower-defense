@@ -111,7 +111,7 @@ public class Menu extends GameScene implements SceneMethods{
         }
     }
 
-    private void LoadSprite() {
+    private void LoadSprite() {// Take the image by block for certain objects
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 sprites.add(img.getSubimage(x * 32, y * 32, 32, 32));
