@@ -45,8 +45,7 @@ public class MyButton {
         //text
         drawText(g);
 
-
-
+        
     }
 
     private void drawBorder(Graphics g) {
