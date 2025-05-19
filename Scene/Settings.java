@@ -8,7 +8,7 @@ import java.awt.*;
 import static Main.GameStates.MENU;
 import static Main.GameStates.SetGameState;
 
-public class Settings extends GameScene implements SceneMethods{
+public class Settings extends GameScene implements SceneMethods{//maybe no need of setting
     private MyButton bMenu;
 
     public Settings(Game game) {

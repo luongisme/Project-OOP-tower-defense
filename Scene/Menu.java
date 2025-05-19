@@ -28,7 +28,7 @@ public class Menu extends GameScene implements SceneMethods{
         initButtons();
     }
 
-    private void initButtons() {
+    private void initButtons() {// set up all the button location
         int w = 150;
         int h = w / 3;
         int x = 640 / 2 - w / 2;
