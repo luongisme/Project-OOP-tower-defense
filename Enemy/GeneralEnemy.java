@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public abstract  class GeneralEnemy {
+public class GeneralEnemy {
     private float x,y;
     protected int hp;
     protected int speed;
@@ -67,9 +67,11 @@ public abstract  class GeneralEnemy {
     public void move(int[][] lvl){
         int xTile=(int) (x/TILE_SIZE);
         int yTile=(int) (y/TILE_SIZE);
+    }
 
-        
-
+    public boolean ReachedEnd(int[][] lvl){
+        int xTile=(int) x/TILE_SIZE;
+        return xTile>=lvl[0].length-1;
     }
 
     public float getX(){
@@ -95,6 +97,5 @@ public abstract  class GeneralEnemy {
     public int getBarLength(){
         return barLength;
     }
-    public abstract void draw(Graphics g);
 
 }
