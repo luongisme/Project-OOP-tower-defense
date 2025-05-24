@@ -21,6 +21,8 @@ public abstract  class GeneralEnemy {
         UP, DOWN, LEFT, RIGHT
     }
 
+    public static final int TILE_SIZE=32;
+
     public GeneralEnemy(int hp, int speed){
         this.hp=hp;
         this.speed=speed;
@@ -60,6 +62,14 @@ public abstract  class GeneralEnemy {
             this.hp=0;
         }
         barWidth -=4*damage;
+    }
+
+    public void move(int[][] lvl){
+        int xTile=(int) (x/TILE_SIZE);
+        int yTile=(int) (y/TILE_SIZE);
+
+        
+
     }
 
     public float getX(){
