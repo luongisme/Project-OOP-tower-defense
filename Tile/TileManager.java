@@ -10,8 +10,6 @@ public class TileManager {
     public Tile GRASS,WATER,ROAD;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
-    public static final int TILE_SIZE=64;
-    public static final int SPRITE_SIZE=32;
 
     public TileManager(){
         loadAtlas();
@@ -31,13 +29,11 @@ public class TileManager {
     public BufferedImage getSprite(int id){
         return tiles.get(id).getSprite();
     }
-    
-    
+
     private BufferedImage getSprite(int xCord, int yCord){
-        return atlas.getSubimage(xCord * SPRITE_SIZE, yCord * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+        return atlas.getSubimage(xCord * 32, yCord * 32, 32, 32);
     }
-    //chang to Tile_size later when find the get sprite
-    public Tile getTile(int id){    
+    public Tile getTile(int id){
         return tiles.get(id);
     }
 }
