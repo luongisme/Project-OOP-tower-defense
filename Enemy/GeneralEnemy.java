@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public abstract  class GeneralEnemy {
+public abstract class GeneralEnemy {
     private float x,y;
     protected int hp;
     protected int speed;
@@ -62,6 +62,11 @@ public abstract  class GeneralEnemy {
         barWidth -=4*damage;
     }
 
+    // the int[][] represent the game level
+    public void move(int [][] lvl){
+        
+    }
+
     public float getX(){
         return x;   
     }
@@ -85,6 +90,7 @@ public abstract  class GeneralEnemy {
     public int getBarLength(){
         return barLength;
     }
+
     public abstract void draw(Graphics g);
 
 }

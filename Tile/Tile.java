@@ -6,6 +6,7 @@ public class Tile {
     private BufferedImage sprite;
     private int id;
     private String name;
+    private boolean canPlaceTower;
 
     public Tile(BufferedImage sprite, int id, String name) {
         this.sprite = sprite;

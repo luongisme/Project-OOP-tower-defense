@@ -42,7 +42,7 @@ public class Playing extends GameScene implements SceneMethods{
         for(int y = 0; y < lvl.length; y++){
             for(int x = 0; x < lvl[y].length; x++){
                 int id = lvl[y][x];
-                g.drawImage(tileManager.getSprite(id), x * 32, y * 32, null);
+                g.drawImage(tileManager.getSprite(id), x * TileManager.TILE_SIZE, y * TileManager.TILE_SIZE,TileManager.TILE_SIZE,TileManager.TILE_SIZE, null);
             }
         }
 
@@ -52,7 +52,7 @@ public class Playing extends GameScene implements SceneMethods{
 
     private void drawSelectedTile(Graphics g) {
         if(selectedTile != null && drawSelect){
-            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);
+            g.drawImage(selectedTile.getSprite(), mouseX, mouseY, TileManager.TILE_SIZE, TileManager.TILE_SIZE, null);
         }
     }
 
@@ -78,8 +78,8 @@ public class Playing extends GameScene implements SceneMethods{
     private void changeTile(int x, int y) {
 
         if(selectedTile != null){
-            int tileX = x / 32;
-            int tileY = y / 32;
+            int tileX = x /TileManager.TILE_SIZE;
+            int tileY = y /TileManager.TILE_SIZE;
             if(lastTileX == tileX && lastTileY == tileY && lastTileId == selectedTile.getId())
                 return;
             lastTileX = tileX;
@@ -98,8 +98,8 @@ public class Playing extends GameScene implements SceneMethods{
             drawSelect = false;
         }else{
             drawSelect = true;
-            mouseX = (x / 32) * 32;
-            mouseY = (y / 32) * 32;
+            mouseX = (x /TileManager.TILE_SIZE) *TileManager.TILE_SIZE;
+            mouseY = (y /TileManager.TILE_SIZE) *TileManager.TILE_SIZE;
 
         }
     }
