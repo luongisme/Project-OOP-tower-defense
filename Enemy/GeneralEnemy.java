@@ -23,7 +23,9 @@ public class GeneralEnemy {
 
     public static final int TILE_SIZE=32;
 
-    public GeneralEnemy(int hp, int speed){
+    public GeneralEnemy(float x,float y){
+        this.x=x;
+        this.y=y;
         this.hp=hp;
         this.speed=speed;
         this.isAlive=true;

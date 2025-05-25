@@ -9,11 +9,14 @@ import Tile.Tile;
 
 import java.awt.*;
 
+import Enemy.EnemyManaging;
+
 import static Main.GameStates.MENU;
 import static Main.GameStates.SetGameState;
 
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
+
     private TileManager tileManager;
 
     private BottomBar bottomBar;
@@ -26,6 +29,8 @@ public class Playing extends GameScene implements SceneMethods{
 
     private int lastTileX, lastTileY, lastTileId;
 
+    private EnemyManaging enemyManaging;
+
     public Playing(Game game) {
         super(game);
         //the lvl
@@ -33,6 +38,7 @@ public class Playing extends GameScene implements SceneMethods{
         lvl = LevelBuild.getLevelOneData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 640, 640, 100, this);//starting at x = 0, y =640(screen)
+        enemyManaging=new EnemyManaging(this);
     }
 
 
@@ -48,6 +54,7 @@ public class Playing extends GameScene implements SceneMethods{
 
         bottomBar.draw(g);
         drawSelectedTile(g);
+        enemyManaging.draw(g);
     }
 
     private void drawSelectedTile(Graphics g) {
