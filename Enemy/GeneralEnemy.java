@@ -66,9 +66,9 @@ public class GeneralEnemy {
         barWidth -=4*damage;
     }
 
-    public void move(int[][] lvl){
-        int xTile=(int) (x/TILE_SIZE);
-        int yTile=(int) (y/TILE_SIZE);
+    public void move(float x,float y){
+        this.x+=x;
+        this.y+=y;
     }
 
     public boolean ReachedEnd(int[][] lvl){

@@ -57,6 +57,10 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging.draw(g);
     }
 
+    public void update(){
+        enemyManaging.update();
+    }
+
     private void drawSelectedTile(Graphics g) {
         if(selectedTile != null && drawSelect){
             g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 32, 32, null);

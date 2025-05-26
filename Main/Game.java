@@ -66,7 +66,7 @@ public class Game extends JFrame implements Runnable {
     }
 
     private void updateGame() {
-        //System.out.println("Game Update!");
+        playing.update();
     }
 
     public static void main(String[] args){
