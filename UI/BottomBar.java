@@ -19,7 +19,7 @@ public class BottomBar {
     private Tile selectedTile;
 
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
-
+// can you modify the bottom bar for me,need some update on the tower place
     public  BottomBar(int x, int y, int width, int height, Playing playing){
         this.x = x;
         this.y = y;
@@ -34,7 +34,7 @@ public class BottomBar {
     public void draw(Graphics g){
         //background
         g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, y, 768, height);
+        g.fillRect(x, 750, 1024, height);
 
         //button
         drawButtons(g);
@@ -42,7 +42,7 @@ public class BottomBar {
 
     private void initButtons() {
 
-        bMenu = new MyButton("Menu", 2, 642, 100, 30);
+        bMenu = new MyButton("Menu", 2, 760, 100, 40);
         int w = 50;
         int h = 50;
         int xStart = 110;
@@ -64,7 +64,7 @@ public class BottomBar {
 
     private void drawSelectedTile(Graphics g) {
         if(selectedTile != null){
-            g.drawImage(selectedTile.getSprite(), 550, 642, 50, 50, null);
+            g.drawImage(selectedTile.getSprite(), 550, 760, 50, 50, null);
             g.setColor(Color.black);
             g.drawRect(550, 642, 50,50);
         }

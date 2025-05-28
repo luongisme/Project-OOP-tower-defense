@@ -37,7 +37,7 @@
 
         public void loadEnemyImages(){
             BufferedImage atlas=LoadSave.getSpriteAtlas();
-            enemyImages[0]=LoadSave.getSpriteAtlas().getSubimage(64*9, 64, 64, 64);
+            enemyImages[0]=LoadSave.getSpriteAtlas().getSubimage(0, 64*2, 64, 64);
             enemyImages[1]=LoadSave.getSpriteAtlas().getSubimage(64, 64, 64, 64);
             enemyImages[2]=LoadSave.getSpriteAtlas().getSubimage(64*2, 64, 64, 64);
             enemyImages[3]=LoadSave.getSpriteAtlas().getSubimage(64*3, 64, 64, 64);
