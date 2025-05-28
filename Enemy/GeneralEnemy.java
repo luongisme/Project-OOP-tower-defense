@@ -21,7 +21,7 @@ public class GeneralEnemy {
         UP, DOWN, LEFT, RIGHT
     }
 
-    public static final int TILE_SIZE=32;
+    public static final int TILE_SIZE=64;
 
     public GeneralEnemy(float x,float y){
         this.x=x;
@@ -32,7 +32,7 @@ public class GeneralEnemy {
         this.isHit=false;
         this.reachEnd=false;
         this.barWidth=4*hp;
-        this.hitbox= new Rectangle((int)x, (int) y, 32, 32);
+        this.hitbox= new Rectangle((int)x, (int) y, 64, 64);
         this.firstDirection=Direction.RIGHT;//when the game start, the enemy set default to go right
     }
 
