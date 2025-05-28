@@ -34,7 +34,7 @@ public class BottomBar {
     public void draw(Graphics g){
         //background
         g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, y, width, height);
+        g.fillRect(x, y, 768, height);
 
         //button
         drawButtons(g);
