@@ -26,12 +26,13 @@
         }   
 
         public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,31*10));// the enemy doesnt walk right on the path so i did a little adjustment
+            enemies.add(new GeneralEnemy(0,64*5));// the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
             for (GeneralEnemy e: enemies){
                 drawEnemyImages(e, g);
+                e.drawHealthBar(g);
             }
         }
 
@@ -46,6 +47,16 @@
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
             g.drawImage(enemyImages[0],(int)e.getX(),(int)e.getY(),null);
         }
+
+        public void enemyMove(GeneralEnemy e){
+            //apply all the method about movement
+        }
+        
+        public PathPoint getEnemyTile(Enemy e){
+            //convert enemy position into a tile
+        }
+
+
 
 
 

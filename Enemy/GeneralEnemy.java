@@ -11,6 +11,7 @@ public class GeneralEnemy {
     protected boolean isAlive;
     protected boolean isHit;
     protected boolean reachEnd;
+    protected int lastDirection;
     protected int barWidth;// only modify barwidth if the enemy get hit
     protected int barLength=5;
     protected Direction firstDirection;
@@ -27,6 +28,7 @@ public class GeneralEnemy {
         this.x=x;
         this.y=y;
         this.hp=hp;
+        this.lastDirection=-1;
         this.speed=speed;
         this.isAlive=true;
         this.isHit=false;
@@ -39,8 +41,9 @@ public class GeneralEnemy {
     public void drawHealthBar(Graphics g){//draw health bar method
         int barX=(int) x;
         int barY=(int) y-10;
+        barWidth=50;
 
-        g.fillRect(barX, barY,barWidth,barLength);
+        
         if(barWidth <= 30 && barWidth >= 20){
             g.setColor(Color.YELLOW);
         }
@@ -53,6 +56,7 @@ public class GeneralEnemy {
         else{
             g.setColor(Color.GREEN);
         }
+        g.fillRect(barX+5, barY+15,barWidth,barLength);
     }
 
     public void receiveDamage(int damage){
@@ -70,12 +74,26 @@ public class GeneralEnemy {
         this.x+=x;
         this.y+=y;
     }
+    // get start health
+    public void updateHitBox(){
+        hitbox.x=(int)x;
+        hitbox.y=(int)y;
+    }
 
     public boolean ReachedEnd(int[][] lvl){
         int xTile=(int) x/TILE_SIZE;
         return xTile>=lvl[0].length-1;
     }
 
+    public void kill(){
+        //when reach the end point
+        isAlive=false;
+        hp=0;
+    }
+
+    public void move(float){
+
+    }
     public float getX(){
         return x;   
     }
