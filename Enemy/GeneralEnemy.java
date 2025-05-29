@@ -91,9 +91,9 @@ public class GeneralEnemy {
         hp=0;
     }
 
-    public void move(float){
+    //public void move(float){
 
-    }
+    //}
     public float getX(){
         return x;   
     }
