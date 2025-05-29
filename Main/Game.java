@@ -4,14 +4,7 @@ package Main;
 import Scene.Menu;
 import Scene.Playing;
 import Scene.Settings;
-import Input.KeyboardListener;
-import Input.MyMouseListener;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Game extends JFrame implements Runnable {
         private GameScreen gameScreen;
@@ -125,4 +118,7 @@ public class Game extends JFrame implements Runnable {
     public Settings getSettings(){
         return settings;
     }
+ 
+    //haidahwidawhwadwa
+    //dtddtdytdytdty
 }
