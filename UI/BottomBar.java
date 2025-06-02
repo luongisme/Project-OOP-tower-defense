@@ -1,15 +1,12 @@
 package UI;
 
+import static Main.GameStates.MENU;
+import static Main.GameStates.SetGameState;
 import Scene.Playing;
-import Main.Game;
 import Tile.Tile;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
-import static Main.GameStates.MENU;
-import static Main.GameStates.SetGameState;
 
 public class BottomBar {
     private int x, y , width, height;
@@ -66,7 +63,7 @@ public class BottomBar {
         if(selectedTile != null){
             g.drawImage(selectedTile.getSprite(), 550, 760, 50, 50, null);
             g.setColor(Color.black);
-            g.drawRect(550, 642, 50,50);
+            g.drawRect(550, 760, 50,50);
         }
     }
 

@@ -1,18 +1,12 @@
 package Scene;
 
-import UI.BottomBar;
-import UI.MyButton;
+import Enemy.EnemyManaging;
 import HelperMethod.LevelBuild;
 import Main.Game;
-import Tile.TileManager;
 import Tile.Tile;
-
+import Tile.TileManager;
+import UI.BottomBar;
 import java.awt.*;
-
-import Enemy.EnemyManaging;
-
-import static Main.GameStates.MENU;
-import static Main.GameStates.SetGameState;
 
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
@@ -37,7 +31,7 @@ public class Playing extends GameScene implements SceneMethods{
         //tileManager
         lvl = LevelBuild.getLevelOneData();
         tileManager = new TileManager();
-        bottomBar = new BottomBar(0, 640, 640, 100, this);//starting at x = 0, y =640(screen)
+        bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =640(screen)
         enemyManaging=new EnemyManaging(this);
     }
 
@@ -79,7 +73,7 @@ public class Playing extends GameScene implements SceneMethods{
 
     @Override
     public void mouseClicked(int x, int y) {
-        if(y >= 640){
+        if(y >= 740){
             bottomBar.mouseClicked(x, y);
         }else{
             changeTile(mouseX, mouseY);
@@ -104,7 +98,7 @@ public class Playing extends GameScene implements SceneMethods{
 
     @Override
     public void mouseMoved(int x, int y) {
-        if(y >= 640){
+        if(y >= 740){
             bottomBar.mouseMoved(x, y);
             drawSelect = false;
         }else{
@@ -117,7 +111,7 @@ public class Playing extends GameScene implements SceneMethods{
 
     @Override
     public void mousePressed(int x, int y) {
-        if(y >= 640){
+        if(y >= 740){
             bottomBar.mousePressed(x, y);
         }
     }
@@ -129,7 +123,7 @@ public class Playing extends GameScene implements SceneMethods{
 
     @Override
     public void mouseDragged(int x, int y) {
-        if(y >= 640){
+        if(y >= 740){
 
         }else{
             changeTile(x, y);

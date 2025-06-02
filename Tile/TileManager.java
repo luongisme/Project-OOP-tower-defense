@@ -1,8 +1,6 @@
 package Tile;
 
 import HelperMethod.LoadSave;
-import Tile.Tile;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -22,7 +20,8 @@ public class TileManager {
         tiles.add(TREE = new Tile(getSprite(0, 0), id++, "Tree"));
         tiles.add(ROAD = new Tile(getSprite(8, 0), id++, "Road"));
         tiles.add(CAMP = new Tile(getSprite(0,6), id++, "Camp"));
-        tiles.add(TOWER = new Tile(getSprite(6, 1), id++,"Tower"));
+        tiles.add(TOWER = new Tile(getSprite(8, 1), id++,"Tower"));
+        tiles.add(ARCHER = new Tile(getSprite(0, 19), id++,"Archer"));
     }
 
     private void loadAtlas() {

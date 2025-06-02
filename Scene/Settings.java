@@ -1,12 +1,10 @@
 package Scene;
 
-import UI.MyButton;
 import Main.Game;
-
-import java.awt.*;
-
 import static Main.GameStates.MENU;
 import static Main.GameStates.SetGameState;
+import UI.MyButton;
+import java.awt.*;
 
 public class Settings extends GameScene implements SceneMethods{//maybe no need of setting
     private MyButton bMenu;
@@ -17,13 +15,13 @@ public class Settings extends GameScene implements SceneMethods{//maybe no need 
     }
 
     private void initButtons() {
-        bMenu = new MyButton("Menu", 2, 2, 100, 30);
+        bMenu = new MyButton("Menu", 2, 2, 100, 40);
     }
 
     @Override
     public void render(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillRect(0, 0, 640, 640);
+        g.fillRect(0, 0, 1024, 868);
 
         drawButtons(g);
     }

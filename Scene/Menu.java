@@ -1,17 +1,15 @@
 package Scene;
 
-import UI.MyButton;
 import Main.Game;
-
-import javax.imageio.ImageIO;
-
+import static Main.GameStates.*;
+import UI.MyButton;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
-import static Main.GameStates.*;
+import javax.imageio.ImageIO;
 
 public class Menu extends GameScene implements SceneMethods{
     private BufferedImage img;
@@ -29,11 +27,11 @@ public class Menu extends GameScene implements SceneMethods{
     }
 
     private void initButtons() {// set up all the button location
-        int w = 150;
+        int w = 325;
         int h = w / 3;
-        int x = 896 / 2 - w / 2;
-        int y = 200;
-        int yOffset = 100;
+        int x = 1024 / 2 - w / 2;
+        int y = 175;
+        int yOffset = 200;
         bPlaying = new MyButton("Play", x, y, w, h);
         bSettings = new MyButton("Settings", x, y + yOffset, w, h);
         bQuit = new MyButton("Quit", x, y + yOffset * 2, w, h);
