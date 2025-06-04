@@ -31,7 +31,7 @@ public class Playing extends GameScene implements SceneMethods{
         //tileManager
         lvl = LevelBuild.getLevelOneData();
         tileManager = new TileManager();
-        bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =640(screen)
+        bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =740(screen)
         enemyManaging=new EnemyManaging(this);
     }
 
