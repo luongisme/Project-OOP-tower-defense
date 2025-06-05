@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class TileManager {
-    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK;
+    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK,WATER;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -21,9 +21,11 @@ public class TileManager {
         tiles.add(ROAD = new Tile(getSprite(8, 0), id++, "Road"));
         tiles.add(CAMP = new Tile(getSprite(0,6), id++, "Camp"));
         tiles.add(TOWER = new Tile(getSprite(6, 1), id++,"Tower"));
-        tiles.add(ARCHER = new Tile(getSprite(0, 16), id++,"Archer"));
-        tiles.add(ORC = new Tile(getSprite(0, 17), id++,"Orc"));
-        tiles.add(SHARK = new Tile(getSprite(0, 8), id++,"Shark"));
+        //these enemy doesnt need to appear in the bottom bar
+        //tiles.add(ARCHER = new Tile(getSprite(0, 16), id++,"Archer"));
+        //tiles.add(ORC = new Tile(getSprite(0, 17), id++,"Orc"));
+        //tiles.add(SHARK = new Tile(getSprite(0, 8), id++,"Shark"));
+        tiles.add(WATER = new Tile(getSprite(0,15), id++,"Water" ));
     }
 
     private void loadAtlas() {
@@ -31,6 +33,15 @@ public class TileManager {
     }
     public BufferedImage getSprite(int id){
         return tiles.get(id).getSprite();
+    }
+
+    private BufferedImage[] getSpriteAnimation(int xCord, int yCord){
+        BufferedImage[] arr= new BufferedImage[10];
+        for (int i=0;i<10;i++){
+            arr[i]=getSprite(xCord,yCord);
+        }
+        return arr;
+
     }
 
     private BufferedImage getSprite(int xCord, int yCord){
