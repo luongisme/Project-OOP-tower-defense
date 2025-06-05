@@ -26,6 +26,12 @@ public class Tile {
         return sprite[animationIndex];
     }
 
+    public Boolean checkAnimation(){
+        return sprite.length>1;
+    }
+
+    
+
     public BufferedImage getSprite() {
         return sprite[0];
     }

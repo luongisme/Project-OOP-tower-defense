@@ -25,7 +25,7 @@ public class TileManager {
         //tiles.add(ARCHER = new Tile(getSprite(0, 16), id++,"Archer"));
         //tiles.add(ORC = new Tile(getSprite(0, 17), id++,"Orc"));
         //tiles.add(SHARK = new Tile(getSprite(0, 8), id++,"Shark"));
-        tiles.add(WATER = new Tile(getSprite(0,15), id++,"Water" ));
+        tiles.add(WATER = new Tile(getSpriteAnimations(0,15), id++,"Water" ));
     }
 
     private void loadAtlas() {
@@ -35,13 +35,25 @@ public class TileManager {
         return tiles.get(id).getSprite();
     }
 
-    private BufferedImage[] getSpriteAnimation(int xCord, int yCord){
-        BufferedImage[] arr= new BufferedImage[10];
-        for (int i=0;i<10;i++){
-            arr[i]=getSprite(xCord,yCord);
+    public BufferedImage getSpiteAnimation(int id, int animationIndex){
+        return tiles.get(id).getSprite(animationIndex);
+    }
+
+    public BufferedImage getSpriteAnimation(int id, int animationIndex) {
+        return tiles.get(id).getSprite(animationIndex);
+    }
+
+    private BufferedImage[] getSpriteAnimations(int xCord, int yCord){
+        BufferedImage[] arr = new BufferedImage[10];
+        for (int i = 0; i < 10; i++) {
+            arr[i] = getSprite(xCord + i, yCord); 
         }
         return arr;
+    }
 
+    
+    public boolean checkSpriteAnimation(int spriteID){
+        return tiles.get(spriteID).checkAnimation();
     }
 
     private BufferedImage getSprite(int xCord, int yCord){

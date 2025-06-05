@@ -7,6 +7,7 @@ import Tile.Tile;
 import Tile.TileManager;
 import UI.BottomBar;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
@@ -25,6 +26,10 @@ public class Playing extends GameScene implements SceneMethods{
 
     private EnemyManaging enemyManaging;
 
+    private int animationIndex;
+    
+    private int tick;
+
     public Playing(Game game) {
         super(game);
         lvl = LevelBuild.getLevelOneData();
@@ -37,20 +42,26 @@ public class Playing extends GameScene implements SceneMethods{
 
     @Override
     public void render(Graphics g) {
-        for(int y = 0; y < lvl.length; y++){
-            for(int x = 0; x < lvl[y].length; x++){
-                int id = lvl[y][x];
-                g.drawImage(tileManager.getSprite(id), x * 64, y * 64, null);
-            }
-        }
-
+        drawLevel(g); // Use the animated drawLevel method
         bottomBar.draw(g);
         drawSelectedTile(g);
         enemyManaging.draw(g);
+        updateTick();
     }
 
     public void update(){
         enemyManaging.update();
+    }
+
+    public void updateTick(){
+        tick++;
+        if (tick>=20){
+            tick=0;
+            animationIndex++;
+            if (animationIndex>=10){
+                animationIndex=0;
+            }
+        }
     }
 
     private void drawSelectedTile(Graphics g) {
@@ -62,6 +73,33 @@ public class Playing extends GameScene implements SceneMethods{
     public void setSelectedTile(Tile tile){
         this.selectedTile = tile;
         drawSelect = true;
+    }
+
+    public void drawLevel(Graphics g){
+        // go through all the tile
+        for (int y=0;y<lvl.length;y++){
+            for (int x=0;x<lvl[y].length;x++){
+                int id=lvl[y][x];
+                if (checkAnimation(id)){
+                    g.drawImage(getSprite(id,animationIndex), x*64, y*64, null);
+                }
+                else{
+                    g.drawImage(getSprite(id), x*64, y*64, null);
+                }
+            }
+        }
+    }
+
+    public BufferedImage getSprite(int spriteID){
+        return tileManager.getSprite(spriteID);
+    }
+
+    public BufferedImage getSprite(int spriteID, int animationIndex){
+        return tileManager.getSpriteAnimation(spriteID, animationIndex);
+    }
+
+    private boolean checkAnimation(int spriteID){
+        return getTileManager().checkSpriteAnimation(spriteID);
     }
 
     public TileManager getTileManager(){
@@ -126,5 +164,9 @@ public class Playing extends GameScene implements SceneMethods{
         }else{
             changeTile(x, y);
         }
+    }
+
+    public void setLevel(int[][] lvl){
+        this.lvl=lvl;
     }
 }
