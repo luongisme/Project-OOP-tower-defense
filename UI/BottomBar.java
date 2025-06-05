@@ -31,7 +31,7 @@ public class BottomBar {
     public void draw(Graphics g){
         //background
         g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, 770, 1024, height);
+        g.fillRect(x, 770, 1280, height); // Set width to 1280 to fit the screen
 
         //button
         drawButtons(g);
