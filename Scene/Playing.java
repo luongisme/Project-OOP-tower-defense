@@ -30,6 +30,8 @@ public class Playing extends GameScene implements SceneMethods{
     
     private int tick;
 
+    private int ANIMATION_SPEED=20;
+
     public Playing(Game game) {
         super(game);
         lvl = LevelBuild.getLevelOneData();
@@ -168,5 +170,9 @@ public class Playing extends GameScene implements SceneMethods{
 
     public void setLevel(int[][] lvl){
         this.lvl=lvl;
+    }
+
+    public int[][] getLevel() {
+        return lvl;
     }
 }

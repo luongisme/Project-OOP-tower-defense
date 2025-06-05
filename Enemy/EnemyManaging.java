@@ -52,12 +52,4 @@
             //apply all the method about movement
         }
         
-        //public PathPoint getEnemyTile(Enemy e){
-            //convert enemy position into a tile
-        //}
-
-
-
-
-
-    }
+}
