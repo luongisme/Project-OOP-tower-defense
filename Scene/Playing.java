@@ -26,6 +26,8 @@ public class Playing extends GameScene implements SceneMethods{
 
     private EnemyManaging enemyManaging;
 
+    //private TowerManager towerManager;
+
     private int animationIndex;
     
     private int tick;
@@ -37,7 +39,8 @@ public class Playing extends GameScene implements SceneMethods{
         lvl = LevelBuild.getLevelOneData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =740(screen)
-        enemyManaging=new EnemyManaging(this);
+        enemyManaging = new EnemyManaging(this);
+        //towerManager = new TowerManager(this);
     }
 
 
@@ -49,10 +52,12 @@ public class Playing extends GameScene implements SceneMethods{
         drawSelectedTile(g);
         enemyManaging.draw(g);
         updateTick();
+        //towerManager.draw(g);
     }
 
     public void update(){
         enemyManaging.update();
+        //towerManager.update();
     }
 
     public void updateTick(){

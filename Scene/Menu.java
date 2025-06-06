@@ -29,7 +29,7 @@ public class Menu extends GameScene implements SceneMethods{
     private void initButtons() {// set up all the button location
         int w = 325;
         int h = w / 3;
-        int x = 1024 / 2 - w / 2;
+        int x = 1280 / 2 - w / 2;
         int y = 175;
         int yOffset = 200;
         bPlaying = new MyButton("Play", x, y, w, h);
