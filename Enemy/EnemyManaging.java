@@ -37,24 +37,56 @@ import java.awt.Graphics;
             return getTileType(newX, newY) == ROAD_TILE;
         }
 
+        public void setNewDirectionAndMove(GeneralEnemy e){
+            int direction=e.getLastDirection();
+
+            if (direction==LEFT||direction==RIGHT){
+                int newY = (int) (e.getY() + getSpeedY(UP));
+
+                if (getTileType((int) e.getX(), newY)==ROAD_TILE){
+                    e.move(speed,UP);
+                }
+
+                else{
+                    e.move(speed,DOWN);
+                }
+                
+            }
+
+            else{
+                int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
+
+                if(getTileType(newX,(int) e.getY())==ROAD_TILE){
+                    e.move(speed, RIGHT);
+                }
+                else{
+                    e.move(speed,LEFT);
+                }
+            }
+        }
+
+        public boolean isAtEnd(GeneralEnemy e){
+            return false;
+        }
+
         private int getTileType(int x, int y){
             return playing.getTileType(x, y);
         }
 
         private float getSpeedX(int direction){
             if (direction == LEFT) return -speed;
-            if (direction == RIGHT) return speed+64;// this get the enemy to stop when no more road to go
+            if (direction == RIGHT) return speed+64;
             return 0;
         }
 
         private float getSpeedY(int direction){
             if (direction == UP) return -speed;
-            if (direction == DOWN) return speed+64;// this get the enemy to stop when no more road to go
+            if (direction == DOWN) return speed+64;
             return 0;
         }
 
         public void addEnemy(){
-            enemies.add(new GeneralEnemy(64*4,64*6));// the enemy doesnt walk right on the path so i did a little adjustment
+            enemies.add(new GeneralEnemy(0,64*11));// the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
@@ -75,8 +107,4 @@ import java.awt.Graphics;
             g.drawImage(enemyImages[0],(int)e.getX(),(int)e.getY(),null);
         }
 
-        public void enemyMove(GeneralEnemy e){
-            //apply all the method about movement
-        }
-        
 }
