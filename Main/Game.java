@@ -4,6 +4,7 @@ package Main;
 import Scene.Menu;
 import Scene.Playing;
 import Scene.Settings;
+import Tile.TileManager;
 import Input.KeyboardListener;
 import Input.MyMouseListener;
 
@@ -126,5 +127,8 @@ public class Game extends JFrame implements Runnable {
         return settings;
     }
 
+    public TileManager getTileManager() {
+		return playing.getTileManager();
+	}
 
 }

@@ -3,7 +3,7 @@ package Enemy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import HelperMethod.Constant.Direction.*;
+import static HelperMethod.Constant.Direction.*;
 
 public class GeneralEnemy {
     private float x,y;
@@ -28,9 +28,9 @@ public class GeneralEnemy {
     public GeneralEnemy(float x,float y){
         this.x=x;
         this.y=y;
-        this.hp=hp;
-        this.lastDirection=-1;
-        this.speed=speed;
+        this.hp=10;
+        this.lastDirection=1; // RIGHT
+        this.speed=1;
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -71,9 +71,21 @@ public class GeneralEnemy {
         barWidth -=4*damage;
     }
 
-    public void move(float x,float y){
-        this.x+=x;
-        this.y+=y;
+    public void move(float speed,int Direction){
+        switch (Direction) {
+            case LEFT:
+                this.x-=speed;
+                break;
+            case RIGHT:
+                this.x+=speed;
+                break;
+            case DOWN:
+                this.y+=speed;
+                break;
+            case UP:
+                this.y-=speed;
+                break;
+        }
     }
     // get start health
     public void updateHitBox(){
@@ -87,14 +99,10 @@ public class GeneralEnemy {
     }
 
     public void kill(){
-        //when reach the end point
         isAlive=false;
         hp=0;
     }
 
-    //public void move(float){
-
-    //}
     public float getX(){
         return x;   
     }

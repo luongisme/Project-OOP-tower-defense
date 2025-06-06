@@ -26,8 +26,6 @@ public class Playing extends GameScene implements SceneMethods{
 
     private EnemyManaging enemyManaging;
 
-    //private TowerManager towerManager;
-
     private int animationIndex;
     
     private int tick;
@@ -44,7 +42,7 @@ public class Playing extends GameScene implements SceneMethods{
     }
 
 
-
+    
     @Override
     public void render(Graphics g) {
         drawLevel(g); // Use the animated drawLevel method
@@ -179,5 +177,10 @@ public class Playing extends GameScene implements SceneMethods{
 
     public int[][] getLevel() {
         return lvl;
+    }
+
+    public int getTileType(int x, int y){
+        int id = lvl[y/64][x/64];
+        return getGame().getTileManager().getTile(id).getTileType();
     }
 }
