@@ -1,6 +1,7 @@
 package Scene;
 
 import Main.Game;
+import java.awt.image.BufferedImage;
 
 public class GameScene {
     private Game game;
@@ -11,4 +12,5 @@ public class GameScene {
     public Game getGame() {
         return game;
     }
+
 }
