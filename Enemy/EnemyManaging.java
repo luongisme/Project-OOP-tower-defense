@@ -2,6 +2,7 @@
     import Scene.Playing;
     import Enemy.GeneralEnemy;
     import HelperMethod.LoadSave;
+    import static HelperMethod.Constant.Direction.*;
 
     import java.awt.Graphics;
     import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@
         private Playing playing;
         private BufferedImage[] enemyImages;
         ArrayList<GeneralEnemy> enemies=new ArrayList<>();
+        private float speed=0.5f;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
@@ -22,8 +24,37 @@
         public void update(){
             for (GeneralEnemy e:enemies ){
                 e.move(0.5f,0);
+                if (isNextTileRoad(e)){
+
+                }
             }
         }   
+
+        public boolean isNextTileRoad(GeneralEnemy e){
+            int newX=(int) (e.getX()+getSpeedX(e.getLastDirection()));
+            int newY=(int) (e.getY()+getSpeedY(e.getLastDirection()));
+            return false;
+        }
+
+        private float getSpeedX(int Direction){
+            if (Direction==UP){
+                return -speed;
+            }
+            else if(Direction==DOWN){
+                return speed;
+            }
+            return 0;
+        }
+
+        private float getSpeedY(int Direction){
+            if (Direction==LEFT){
+                return -speed;
+            }
+            else if(Direction==RIGHT){
+                return speed;
+            }
+            return 0;
+        }
 
         public void addEnemy(){
             enemies.add(new GeneralEnemy(0,64*6));// the enemy doesnt walk right on the path so i did a little adjustment

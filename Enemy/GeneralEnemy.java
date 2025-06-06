@@ -3,6 +3,7 @@ package Enemy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import HelperMethod.Constant.Direction.*;
 
 public class GeneralEnemy {
     private float x,y;
@@ -116,6 +117,10 @@ public class GeneralEnemy {
 
     public int getBarLength(){
         return barLength;
+    }
+
+    public int getLastDirection(){
+        return lastDirection;
     }
 
 }
