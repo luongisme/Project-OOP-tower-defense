@@ -32,7 +32,7 @@ public class Playing extends GameScene implements SceneMethods{
     
     private int tick;
 
-    private int ANIMATION_SPEED=20;
+    private int ANIMATION_SPEED=10;
 
     public Playing(Game game) {
         super(game);

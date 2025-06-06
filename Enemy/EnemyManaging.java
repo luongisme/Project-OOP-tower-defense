@@ -26,7 +26,7 @@
         }   
 
         public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,64*5));// the enemy doesnt walk right on the path so i did a little adjustment
+            enemies.add(new GeneralEnemy(0,64*6));// the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
