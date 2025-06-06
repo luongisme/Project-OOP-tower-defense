@@ -34,7 +34,13 @@ import java.awt.Graphics;
         public boolean isNextTileRoad(GeneralEnemy e){
             int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
             int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
-            return getTileType(newX, newY) == ROAD_TILE;
+            if( getTileType(newX, newY) == ROAD_TILE){
+                e.move(speed,e.getLastDirection());
+            }
+            else{
+                setNewDirectionAndMove(e);
+            }
+            return false;
         }
 
         public void setNewDirectionAndMove(GeneralEnemy e){
