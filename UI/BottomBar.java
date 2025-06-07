@@ -50,18 +50,18 @@ public class BottomBar {
         int i = 0;
         towerButtons = new MyButton[1];
 
-        for(Tile tile : playing.getTileManager().tiles){
+        //for(Tile tile : playing.getTileManager().tiles){
             //g.setColor(Color.GRAY);
             //g.fillRect(xStart + xOffset * i, yStart, w, h);
             //towerButtons.add(new MyButton(tile.getName(), xStart + xOffset * i, yStart , w, h, i));
             towerButtons[i] = new MyButton("", xStart+ xOffset * i, yStart, w, h, i);
             i++;
-        }
+        //}
     }
     private void drawButtons(Graphics g) {
         
         
-        drawTileButtons(g);
+        //drawTileButtons(g);
         bMenu.draw(g);
         for(MyButton b : towerButtons){
             g.setColor(Color.GRAY);

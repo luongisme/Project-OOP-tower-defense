@@ -15,9 +15,9 @@ import java.awt.image.BufferedImage;
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
 
-    private TileManager tileManager;
+    private final TileManager tileManager;
 
-    private BottomBar bottomBar;
+    private final BottomBar bottomBar;
 
     private Tile selectedTile;
 
@@ -27,17 +27,15 @@ public class Playing extends GameScene implements SceneMethods{
 
     private int lastTileX, lastTileY, lastTileId;
 
-    private EnemyManaging enemyManaging;
+    private final EnemyManaging enemyManaging;
 
-    private TowerManager towerManager;
+    private final TowerManager towerManager;
 
     private Tower selectedTower;
 
     private int animationIndex;
     
     private int tick;
-
-    private int ANIMATION_SPEED=10;
 
     
 
@@ -149,15 +147,15 @@ public class Playing extends GameScene implements SceneMethods{
             if(selectedTower != null){
                 if(isTilePlaceable(mouseX, mouseY)){
                     if(getTowerAt(mouseX, mouseY) == null){
-                      towerManager.addTower(selectedTower, mouseX, mouseY);
-                      selectedTower = null;
-              }   
+                        towerManager.addTower(selectedTower, mouseX, mouseY);
+                        selectedTower = null;
+                    }
+                }
             }
         }
     }
-}
     
-     private Tower getTowerAt(int x, int y){
+     private Tower getTowerAt(int x, int y) {
         return towerManager.getTowerAt(x, y);
     }
      
