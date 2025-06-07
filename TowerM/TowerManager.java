@@ -18,10 +18,6 @@ public class TowerManager {
         loadTowerImages();
     }
 
-
-
-
-
     private void loadTowerImages() {
         BufferedImage atlas = LoadSave.getSpriteAtlas();
         towerImages = new BufferedImage[1];
