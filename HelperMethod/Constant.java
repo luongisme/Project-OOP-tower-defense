@@ -3,7 +3,7 @@ package HelperMethod;
 public class Constant {
 
     public static class Towers{
-        public static final int TOWER = 0;
+        public static final int TOWER1 = 0;
     } 
 
 
