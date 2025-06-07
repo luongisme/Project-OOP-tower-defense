@@ -31,9 +31,8 @@ public class Game extends JFrame implements Runnable {
         private Settings settings;
 
     public Game(){
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true); // Allow window resizing
         initClasses();
         add(gameScreen);
         pack();

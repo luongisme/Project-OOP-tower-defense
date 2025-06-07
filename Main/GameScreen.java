@@ -19,7 +19,7 @@ public class GameScreen extends JPanel {
         this.game = game;
 
         setPanelSize();
-
+       
     }
 
     public void initInputs(){
@@ -28,7 +28,7 @@ public class GameScreen extends JPanel {
 
         addMouseListener(myMouseListener);
         addMouseMotionListener(myMouseListener);
-
+        
         addKeyListener(keyboardListener);
 
         requestFocus();//focus on particular component, make sure no weird bugs(no much need bc of JFrame and JPanel)

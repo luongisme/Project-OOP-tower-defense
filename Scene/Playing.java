@@ -7,8 +7,10 @@ import Tile.Tile;
 import Tile.TileManager;
 import TowerM.TowerManager;
 import UI.BottomBar;
+import Player.Players;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
@@ -35,6 +37,8 @@ public class Playing extends GameScene implements SceneMethods{
 
     private int ANIMATION_SPEED=10;
 
+    private Players player;
+
     public Playing(Game game) {
         super(game);
         lvl = LevelBuild.getLevelOneData();
@@ -42,6 +46,7 @@ public class Playing extends GameScene implements SceneMethods{
         bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =740(screen)
         enemyManaging = new EnemyManaging(this);
         towerManager = new TowerManager(this);
+        player = new Players(90); // Initialize player with starting money
     }
 
 
@@ -54,6 +59,7 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging.draw(g);
         updateTick();
         towerManager.draw(g);
+        player.drawMoneyAmount(g);
     }
 
     public void update(){

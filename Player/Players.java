@@ -5,13 +5,13 @@ public class Players {
     private int money;
 
     public Players(int money){
-        this.money=money;
+        this.money=90;
     }
 
     //public boolean checkSurvive(){}
     // when one enemy go past, you die
     public void drawMoneyAmount(Graphics g){
-        int x=10;
+        int x=10*64;
         int y=25;
         g.setColor(Color.YELLOW);
         g.setFont(new Font("Arial",Font.BOLD,18));
