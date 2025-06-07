@@ -1,6 +1,12 @@
 package HelperMethod;
 
 public class Constant {
+
+    public static class Towers{
+        public static final int TOWER = 0;
+    } 
+
+
     public static class Direction{
     public static final int LEFT=0;
     public static final int RIGHT=1;

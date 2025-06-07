@@ -1,10 +1,8 @@
 package Enemy;
-    import Scene.Playing;
-    import Enemy.GeneralEnemy;
-    import HelperMethod.LoadSave;
     import static HelperMethod.Constant.Direction.*;
     import static HelperMethod.Constant.Tiles.ROAD_TILE;
-
+    import HelperMethod.LoadSave;
+    import Scene.Playing;
     import java.awt.Graphics;
     import java.awt.image.BufferedImage;
     import java.util.ArrayList;

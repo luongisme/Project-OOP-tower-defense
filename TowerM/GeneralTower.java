@@ -1,9 +1,9 @@
 package TowerM;
 
-public class Tower {
+public class GeneralTower {
     private int x, y, id, towerType;
 
-    public Tower(int x, int y, int id, int towerType) {
+    public GeneralTower(int x, int y, int id, int towerType) {
         this.x = x;
         this.y = y;
         this.id = id;
