@@ -61,9 +61,9 @@ public class BottomBar {
 
     private void drawSelectedTile(Graphics g) {
         if(selectedTile != null){
-            g.drawImage(selectedTile.getSprite(), 940, 772, 65, 65, null);
+            g.drawImage(selectedTile.getSprite(), 1200, 772, 65, 65, null);
             g.setColor(Color.black);
-            g.drawRect(940, 772, 65,65);
+            g.drawRect(1200, 772, 65,65);
         }
     }
 

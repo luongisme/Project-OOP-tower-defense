@@ -15,7 +15,7 @@ public class Menu extends GameScene implements SceneMethods{
     private BufferedImage img;
     private ArrayList<BufferedImage> sprites = new ArrayList<>();//add or remove
     private Random random;
-
+    private BufferedImage menuImage;
     private MyButton bPlaying, bSettings, bQuit;
 
     public Menu(Game game) {
@@ -23,13 +23,14 @@ public class Menu extends GameScene implements SceneMethods{
         random = new Random();
         importImg();
         LoadSprite();
+        loadMenuImage(); // Ensure menu image is loaded
         initButtons();
     }
 
     private void initButtons() {// set up all the button location
         int w = 325;
         int h = w / 3;
-        int x = 1024 / 2 - w / 2;
+        int x = 1280 / 2 - w / 2;
         int y = 175;
         int yOffset = 200;
         bPlaying = new MyButton("Play", x, y, w, h);
@@ -39,6 +40,13 @@ public class Menu extends GameScene implements SceneMethods{
 
     @Override
     public void render(Graphics g) {
+        if (menuImage == null) {
+            loadMenuImage();
+        }
+        if (menuImage != null) {
+            // Scale the menu image to fit the panel size
+            g.drawImage(menuImage, 0, 0, g.getClipBounds().width, g.getClipBounds().height, null);
+        }
         drawButtons(g);
     }
 
@@ -101,10 +109,19 @@ public class Menu extends GameScene implements SceneMethods{
     }
 
     public void importImg(){
-        InputStream is = getClass().getResourceAsStream("/spriteatlas.png");//InputSteam: class to read image
+        InputStream is = getClass().getResourceAsStream("/spritesheet.png");//InputSteam: class to read image
         try {
             img = ImageIO.read(is);
         } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMenuImage() {
+        // Load the menu image
+        try {
+            menuImage = ImageIO.read(getClass().getResource("/Menu.gif"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

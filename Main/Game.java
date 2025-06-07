@@ -4,6 +4,7 @@ package Main;
 import Scene.Menu;
 import Scene.Playing;
 import Scene.Settings;
+import Tile.TileManager;
 import Input.KeyboardListener;
 import Input.MyMouseListener;
 
@@ -32,14 +33,11 @@ public class Game extends JFrame implements Runnable {
     public Game(){
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setResizable(false);
-
         initClasses();
         add(gameScreen);
-
-
-        pack();//should be placed correctly, after JFrame has been added
+        pack();
+        setLocationRelativeTo(null); // Center the window on the screen
         setVisible(true);
     }
 
@@ -126,5 +124,8 @@ public class Game extends JFrame implements Runnable {
         return settings;
     }
 
+    public TileManager getTileManager() {
+		return playing.getTileManager();
+	}
 
 }

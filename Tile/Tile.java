@@ -4,21 +4,21 @@ import java.awt.image.BufferedImage;
 
 public class Tile {
     private BufferedImage[] sprite;
-    private int id;
+    private int id,tileType;
     private String name;
     private boolean canPlaceTower;
 
-    public Tile(BufferedImage sprite, int id, String name) {
+    public Tile(BufferedImage sprite, int id, int tileType) {
         this.sprite = new BufferedImage[1];
         this.sprite[0]=sprite;
         this.id = id;
-        this.name = name;
+        this.tileType=tileType;
     }
 
-    public Tile(BufferedImage[] sprite, int id, String name){
+    public Tile(BufferedImage[] sprite, int id, int tileType){
         this.sprite=sprite;
         this.id=id;
-        this.name=name;
+        this.tileType=tileType;
     }
 
     //this work as a slide that transition from picture to picture of an object
@@ -30,7 +30,9 @@ public class Tile {
         return sprite.length>1;
     }
 
-    
+    public int getTileType(){
+        return tileType;
+    }
 
     public BufferedImage getSprite() {
         return sprite[0];

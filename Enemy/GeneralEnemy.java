@@ -3,6 +3,7 @@ package Enemy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import static HelperMethod.Constant.Direction.*;
 
 public class GeneralEnemy {
     private float x,y;
@@ -18,6 +19,11 @@ public class GeneralEnemy {
 
     protected Rectangle hitbox;// act as the hitbox of the enemy
 
+    protected int animationIndex = 0;
+    protected int animationTick = 0;
+    protected int animationSpeed = 10; // Lower is faster
+    protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
+
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
@@ -27,9 +33,9 @@ public class GeneralEnemy {
     public GeneralEnemy(float x,float y){
         this.x=x;
         this.y=y;
-        this.hp=hp;
-        this.lastDirection=-1;
-        this.speed=speed;
+        this.hp=10;
+        this.lastDirection=1; // RIGHT
+        this.speed=1;
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -70,9 +76,27 @@ public class GeneralEnemy {
         barWidth -=4*damage;
     }
 
-    public void move(float x,float y){
-        this.x+=x;
-        this.y+=y;
+    public void setPos(int x, int y) {
+
+		this.x = x;
+		this.y = y;
+	}
+
+    public void move(float speed,int Direction){
+        switch (Direction) {
+            case LEFT:
+                this.x-=speed;
+                break;
+            case RIGHT:
+                this.x+=speed;
+                break;
+            case DOWN:
+                this.y+=speed;
+                break;
+            case UP:
+                this.y-=speed;
+                break;
+        }
     }
     // get start health
     public void updateHitBox(){
@@ -86,14 +110,10 @@ public class GeneralEnemy {
     }
 
     public void kill(){
-        //when reach the end point
         isAlive=false;
         hp=0;
     }
 
-    //public void move(float){
-
-    //}
     public float getX(){
         return x;   
     }
@@ -116,6 +136,27 @@ public class GeneralEnemy {
 
     public int getBarLength(){
         return barLength;
+    }
+
+    public int getLastDirection(){
+        return lastDirection;
+    }
+
+    
+
+    public void updateAnimation() {
+        animationTick++;
+        if (animationTick >= animationSpeed) {
+            animationTick = 0;
+            animationIndex++;
+            if (animationIndex >= maxAnimationFrames) {
+                animationIndex = 0;
+            }
+        }
+    }
+
+    public int getAnimationIndex() {
+        return animationIndex;
     }
 
 }

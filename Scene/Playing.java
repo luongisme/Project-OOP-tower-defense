@@ -37,11 +37,12 @@ public class Playing extends GameScene implements SceneMethods{
         lvl = LevelBuild.getLevelOneData();
         tileManager = new TileManager();
         bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =740(screen)
-        enemyManaging=new EnemyManaging(this);
+        enemyManaging = new EnemyManaging(this);
+        //towerManager = new TowerManager(this);
     }
 
 
-
+    
     @Override
     public void render(Graphics g) {
         drawLevel(g); // Use the animated drawLevel method
@@ -49,10 +50,12 @@ public class Playing extends GameScene implements SceneMethods{
         drawSelectedTile(g);
         enemyManaging.draw(g);
         updateTick();
+        //towerManager.draw(g);
     }
 
     public void update(){
         enemyManaging.update();
+        //towerManager.update();
     }
 
     public void updateTick(){
@@ -174,5 +177,10 @@ public class Playing extends GameScene implements SceneMethods{
 
     public int[][] getLevel() {
         return lvl;
+    }
+
+    public int getTileType(int x, int y){
+        int id = lvl[y/64][x/64];
+        return getGame().getTileManager().getTile(id).getTileType();
     }
 }
