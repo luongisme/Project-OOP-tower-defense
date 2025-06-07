@@ -8,7 +8,7 @@ import static HelperMethod.Constant.Direction.*;
 public class GeneralEnemy {
     private float x,y;
     protected int hp;
-    protected int speed;
+    protected float speed;
     protected boolean isAlive;
     protected boolean isHit;
     protected boolean reachEnd;
@@ -24,18 +24,21 @@ public class GeneralEnemy {
     protected int animationSpeed = 10; // Lower is faster
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
 
+    private int type;
+
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
 
     public static final int TILE_SIZE=64;
 
-    public GeneralEnemy(float x,float y){
+    public GeneralEnemy(float x,float y, int type){
         this.x=x;
         this.y=y;
-        this.hp=10;
+        this.type = type;
+        this.hp= HelperMethod.Constant.GetStartHealth(type);
+        this.speed= HelperMethod.Constant.GetSpeed(type);
         this.lastDirection=1; // RIGHT
-        this.speed=1;
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -142,7 +145,9 @@ public class GeneralEnemy {
         return lastDirection;
     }
 
-    
+    public int getType() {
+        return type;
+    }
 
     public void updateAnimation() {
         animationTick++;

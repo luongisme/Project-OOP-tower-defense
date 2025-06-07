@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import Enemy.GeneralEnemy;
 
 public class WaveManger {
-    private int[] waveEnemyCounts = {5, 10, 15, 20}; // 4 waves with increasing enemy counts
+    private int[] waveEnemyCounts = {5, 10, 15, 20, 25, 30}; // 6 waves with increasing enemy counts
     private int currentWave = 0;
     private int enemiesInCurrentWave = 0;
     private long lastSpawnTime = 0;
@@ -34,9 +34,10 @@ public class WaveManger {
     }
 
     private void enemyTypeRandom() {
-        // Example: spawn a random type of enemy at a fixed position
-        int type = (int) (Math.random() * 3); // 0, 1, or 2
-        enemies.add(new GeneralEnemy(0, 64 * 11)); // You can extend this to use type if needed
+        // Only random 0, 1, or 3
+        int[] validTypes = {0, 1, 3};
+        int type = validTypes[(int) (Math.random() * validTypes.length)];
+        enemies.add(new GeneralEnemy(0, 64 * 11, type));
     }
 
     public ArrayList<GeneralEnemy> getEnemies() {
