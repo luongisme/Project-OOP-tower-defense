@@ -29,19 +29,24 @@ public class GeneralEnemy {
     }
 
     public static final int TILE_SIZE=64;
+    public static final float[] BASE_SPEED = {0.6f, 1.0f, 0.4f, 0.8f};
+    public static final int[] BASE_HP = {10, 20, 30, 40};
 
-    public GeneralEnemy(float x,float y){
-        this.x=x;
-        this.y=y;
-        this.hp=10;
-        this.lastDirection=1; // RIGHT
-        this.speed=1;
-        this.isAlive=true;
-        this.isHit=false;
-        this.reachEnd=false;
-        this.barWidth=4*hp;
-        this.hitbox= new Rectangle((int)x, (int) y, 64, 64);
-        this.firstDirection=Direction.RIGHT;//when the game start, the enemy set default to go right
+    protected int type;
+
+    public GeneralEnemy(float x, float y, int type) {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.hp = BASE_HP[type];
+        this.lastDirection = 1; // RIGHT
+        this.speed = (int) BASE_SPEED[type];
+        this.isAlive = true;
+        this.isHit = false;
+        this.reachEnd = false;
+        this.barWidth = 4 * hp;
+        this.hitbox = new Rectangle((int) x, (int) y, 64, 64);
+        this.firstDirection = Direction.RIGHT;//when the game start, the enemy set default to go right
     }
 
     public void drawHealthBar(Graphics g){//draw health bar method
@@ -142,7 +147,15 @@ public class GeneralEnemy {
         return lastDirection;
     }
 
-    
+    public int getType() {
+        return type;
+    }
+    public float getSpeed() {
+        return BASE_SPEED[type];
+    }
+    public int getBaseHp() {
+        return BASE_HP[type];
+    }
 
     public void updateAnimation() {
         animationTick++;

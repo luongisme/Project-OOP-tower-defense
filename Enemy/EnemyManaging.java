@@ -115,7 +115,8 @@ package Enemy;
         }
 
         public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,64*11));// the enemy doesnt walk right on the path so i did a little adjustment
+            // Example: add a type 0 enemy
+            enemies.add(new GeneralEnemy(0, 64*11, 0));
         }
 
         public void draw(Graphics g){
@@ -135,8 +136,7 @@ package Enemy;
         }
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
-            // For now always use type 0,1,3 
-            int type = 0;
+            int type = e.getType();
             int frame = e.getAnimationIndex();
             g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
         }
