@@ -1,4 +1,4 @@
-/* package TowerM;
+ package TowerM;
 
 import Scene.Playing;
 import Tile.Tile;
@@ -6,7 +6,7 @@ import Tile.Tile;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import HelperMethod.LoadSave;
-import Tower.Tower;
+import TowerM.Tower;
 import TowerM.Tower;
 import java.util.ArrayList;
 
@@ -39,4 +39,3 @@ public class TowerManager {
     }
 
 }
-*/

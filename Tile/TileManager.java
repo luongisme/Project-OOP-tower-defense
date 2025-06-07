@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static HelperMethod.Constant.Tiles.*;
 
 public class TileManager {
-    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK,WATER;
+    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK,WATER,GRASS_TOWER;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -17,16 +17,17 @@ public class TileManager {
 
     private void createTiles() {
         int id = 0;
-        tiles.add(GRASS = new Tile(getSprite(3, 6), id++, GRASS_TILE));
-        tiles.add(TREE = new Tile(getSprite(0, 0), id++, TREE_TILE));
-        tiles.add(ROAD = new Tile(getSprite(8, 0), id++, ROAD_TILE));
-        tiles.add(CAMP = new Tile(getSprite(0,6), id++,CAMP_TILE));
-        tiles.add(TOWER = new Tile(getSprite(6, 1), id++,TOWER_TILE));
+        tiles.add(GRASS = new Tile(getSprite(3, 6), id++, GRASS_TILE,false));
+        tiles.add(TREE = new Tile(getSprite(0, 0), id++, TREE_TILE,false));
+        tiles.add(ROAD = new Tile(getSprite(8, 0), id++, ROAD_TILE,false));
+        tiles.add(CAMP = new Tile(getSprite(0,6), id++,CAMP_TILE,false));
+        tiles.add(TOWER = new Tile(getSprite(6, 1), id++,TOWER_TILE,false));
         //these enemy doesnt need to appear in the bottom bar
         //tiles.add(ARCHER = new Tile(getSprite(0, 16), id++,"Archer"));
         //tiles.add(ORC = new Tile(getSprite(0, 17), id++,"Orc"));
         //tiles.add(SHARK = new Tile(getSprite(0, 8), id++,"Shark"));
-        tiles.add(WATER = new Tile(getSpriteAnimations(0,15), id++,WATER_TILE ));
+        tiles.add(WATER = new Tile(getSpriteAnimations(0,15), id++,WATER_TILE ,false));
+        tiles.add(GRASS_TOWER = new Tile(getSprite(3,6),id++,GRASS_TOWER_TILE,true));
     }
 
     private void loadAtlas() {
