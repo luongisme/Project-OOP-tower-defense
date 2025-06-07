@@ -71,6 +71,12 @@ public class GeneralEnemy {
         barWidth -=4*damage;
     }
 
+    public void setPos(int x, int y) {
+
+		this.x = x;
+		this.y = y;
+	}
+
     public void move(float speed,int Direction){
         switch (Direction) {
             case LEFT:

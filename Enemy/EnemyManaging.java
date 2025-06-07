@@ -3,9 +3,9 @@ package Enemy;
     import Enemy.GeneralEnemy;
     import HelperMethod.LoadSave;
     import static HelperMethod.Constant.Direction.*;
-import static HelperMethod.Constant.Tiles.ROAD_TILE;
+    import static HelperMethod.Constant.Tiles.ROAD_TILE;
 
-import java.awt.Graphics;
+    import java.awt.Graphics;
     import java.awt.image.BufferedImage;
     import java.util.ArrayList;
 
@@ -24,52 +24,72 @@ import java.awt.Graphics;
 
         public void update(){
             for (GeneralEnemy e:enemies ){
+                // Only move if the next tile is a road
                 if (isNextTileRoad(e)){
                     e.move(speed, e.getLastDirection());
+                } else {
+                    setNewDirectionAndMove(e);
                 }
-                // else: do nothing, enemy stops
             }
         }   
 
         public boolean isNextTileRoad(GeneralEnemy e){
             int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
             int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
-            if( getTileType(newX, newY) == ROAD_TILE){
-                e.move(speed,e.getLastDirection());
-            }
-            else{
-                setNewDirectionAndMove(e);
-            }
-            return false;
+            return getTileType(newX, newY) == ROAD_TILE;
         }
 
         public void setNewDirectionAndMove(GeneralEnemy e){
-            int direction=e.getLastDirection();
+            int direction = e.getLastDirection();
 
-            if (direction==LEFT||direction==RIGHT){
+            int xCord = (int) (e.getX() / 64);
+            int yCord = (int) (e.getY() / 64);
+
+            fixEnemyOffsetTile(e, direction, xCord, yCord);
+            // Try all directions to find a valid road tile
+            
+            if (direction == LEFT || direction == RIGHT) {
                 int newY = (int) (e.getY() + getSpeedY(UP));
 
-                if (getTileType((int) e.getX(), newY)==ROAD_TILE){
-                    e.move(speed,UP);
+                if (getTileType((int) e.getX(), newY) == ROAD_TILE) {
+                    e.move(speed, UP);
+                    e.lastDirection = UP;
+
+                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN))) == ROAD_TILE) {
+                    e.move(speed, DOWN);
+                    e.lastDirection = DOWN;
+
                 }
+            } else {
 
-                else{
-                    e.move(speed,DOWN);
-                }
-                
-            }
+                int newX = (int) (e.getX() + getSpeedX(RIGHT));
 
-            else{
-                int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
-
-                if(getTileType(newX,(int) e.getY())==ROAD_TILE){
+                if (getTileType(newX, (int) e.getY()) == ROAD_TILE) {
                     e.move(speed, RIGHT);
-                }
-                else{
-                    e.move(speed,LEFT);
+                    e.lastDirection = RIGHT;
+
+                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT)), (int) e.getY()) == ROAD_TILE) {
+                    e.move(speed, LEFT);
+                    e.lastDirection = LEFT;
+
                 }
             }
         }
+
+        private void fixEnemyOffsetTile(GeneralEnemy e, int direction, int xCord, int yCord) {
+		switch (direction) {
+		case RIGHT:
+			if (xCord < 19)
+				xCord++;
+			break;
+		case DOWN:
+			if (yCord < 12)
+				yCord++;
+			break;
+		}
+
+		e.setPos(xCord * 64, yCord * 64);
+	}
 
         public boolean isAtEnd(GeneralEnemy e){
             return false;
