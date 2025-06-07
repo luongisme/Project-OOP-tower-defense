@@ -15,9 +15,9 @@ import java.awt.image.BufferedImage;
 public class Playing extends GameScene implements SceneMethods{
     private int[][] lvl;
 
-    private final TileManager tileManager;
+    private TileManager tileManager;
 
-    private final BottomBar bottomBar;
+    private BottomBar bottomBar;
 
     private Tile selectedTile;
 
@@ -27,9 +27,9 @@ public class Playing extends GameScene implements SceneMethods{
 
     private int lastTileX, lastTileY, lastTileId;
 
-    private final EnemyManaging enemyManaging;
+    private EnemyManaging enemyManaging;
 
-    private final TowerManager towerManager;
+    private TowerManager towerManager;
 
     private Tower selectedTower;
 
