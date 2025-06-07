@@ -19,6 +19,11 @@ public class GeneralEnemy {
 
     protected Rectangle hitbox;// act as the hitbox of the enemy
 
+    protected int animationIndex = 0;
+    protected int animationTick = 0;
+    protected int animationSpeed = 10; // Lower is faster
+    protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
+
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
@@ -28,7 +33,7 @@ public class GeneralEnemy {
     public GeneralEnemy(float x,float y){
         this.x=x;
         this.y=y;
-        this.hp=20;
+        this.hp=10;
         this.lastDirection=1; // RIGHT
         this.speed=1;
         this.isAlive=true;
@@ -135,6 +140,23 @@ public class GeneralEnemy {
 
     public int getLastDirection(){
         return lastDirection;
+    }
+
+    
+
+    public void updateAnimation() {
+        animationTick++;
+        if (animationTick >= animationSpeed) {
+            animationTick = 0;
+            animationIndex++;
+            if (animationIndex >= maxAnimationFrames) {
+                animationIndex = 0;
+            }
+        }
+    }
+
+    public int getAnimationIndex() {
+        return animationIndex;
     }
 
 }

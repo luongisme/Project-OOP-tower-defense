@@ -11,20 +11,20 @@ package Enemy;
 
     public class EnemyManaging {
         private Playing playing;
-        private BufferedImage[] enemyImages;
+        private BufferedImage[][] enemyImages; // [enemyType][frame]
         ArrayList<GeneralEnemy> enemies=new ArrayList<>();
-        private float speed=2f;
+        private float speed=0.6f;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
-            enemyImages= new BufferedImage[4];
+            enemyImages= new BufferedImage[4][10]; // 4 enemy types, 10 frames each
             addEnemy();
             loadEnemyImages();
         }
 
         public void update(){
             for (GeneralEnemy e:enemies ){
-                // Only move if the next tile is a road
+                e.updateAnimation(); // update animation frame
                 isNextTileRoad(e);
             }
         }   
@@ -126,14 +126,19 @@ package Enemy;
         }
 
         public void loadEnemyImages(){
-            enemyImages[0]=LoadSave.getSpriteAtlas().getSubimage(0, 64*2, 64, 64);
-            enemyImages[1]=LoadSave.getSpriteAtlas().getSubimage(0, 64*7, 64, 64);
-            enemyImages[2]=LoadSave.getSpriteAtlas().getSubimage(0, 64*13, 64, 64);
-            enemyImages[3]=LoadSave.getSpriteAtlas().getSubimage(0, 64*17, 64, 64);
+            //  load 10 frames for each enemy type 
+            for (int type = 0; type < 4; type++) {
+                for (int frame = 0; frame < 10; frame++) {
+                    enemyImages[type][frame] = LoadSave.getSpriteAtlas().getSubimage(64 * frame, 64 * (2 + type * 5), 64, 64);
+                }
+            }
         }
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
-            g.drawImage(enemyImages[3   ],(int)e.getX(),(int)e.getY(),null);
+            // For now always use type 0,1,3 
+            int type = 0;
+            int frame = e.getAnimationIndex();
+            g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
         }
 
 }
