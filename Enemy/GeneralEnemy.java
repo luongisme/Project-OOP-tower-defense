@@ -28,7 +28,7 @@ public class GeneralEnemy {
     public GeneralEnemy(float x,float y){
         this.x=x;
         this.y=y;
-        this.hp=10;
+        this.hp=20;
         this.lastDirection=1; // RIGHT
         this.speed=1;
         this.isAlive=true;

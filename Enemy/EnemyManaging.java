@@ -13,7 +13,7 @@ package Enemy;
         private Playing playing;
         private BufferedImage[] enemyImages;
         ArrayList<GeneralEnemy> enemies=new ArrayList<>();
-        private float speed=1f;
+        private float speed=2f;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
@@ -25,18 +25,21 @@ package Enemy;
         public void update(){
             for (GeneralEnemy e:enemies ){
                 // Only move if the next tile is a road
-                if (isNextTileRoad(e)){
-                    e.move(speed, e.getLastDirection());
-                } else {
-                    setNewDirectionAndMove(e);
-                }
+                isNextTileRoad(e);
             }
         }   
 
-        public boolean isNextTileRoad(GeneralEnemy e){
+        public void isNextTileRoad(GeneralEnemy e){
             int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
             int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
-            return getTileType(newX, newY) == ROAD_TILE;
+            if  (getTileType(newX, newY) == ROAD_TILE){
+                e.move(speed, e.getLastDirection());
+            }
+            else if(isAtEnd(e)){
+            }
+            else{
+                setNewDirectionAndMove(e);
+            }
         }
 
         public void setNewDirectionAndMove(GeneralEnemy e){
@@ -47,7 +50,7 @@ package Enemy;
 
             fixEnemyOffsetTile(e, direction, xCord, yCord);
             // Try all directions to find a valid road tile
-            
+
             if (direction == LEFT || direction == RIGHT) {
                 int newY = (int) (e.getY() + getSpeedY(UP));
 
@@ -124,13 +127,13 @@ package Enemy;
 
         public void loadEnemyImages(){
             enemyImages[0]=LoadSave.getSpriteAtlas().getSubimage(0, 64*2, 64, 64);
-            enemyImages[1]=LoadSave.getSpriteAtlas().getSubimage(64, 64, 64, 64);
-            enemyImages[2]=LoadSave.getSpriteAtlas().getSubimage(64*2, 64, 64, 64);
-            enemyImages[3]=LoadSave.getSpriteAtlas().getSubimage(64*3, 64, 64, 64);
+            enemyImages[1]=LoadSave.getSpriteAtlas().getSubimage(0, 64*7, 64, 64);
+            enemyImages[2]=LoadSave.getSpriteAtlas().getSubimage(0, 64*13, 64, 64);
+            enemyImages[3]=LoadSave.getSpriteAtlas().getSubimage(0, 64*17, 64, 64);
         }
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
-            g.drawImage(enemyImages[0],(int)e.getX(),(int)e.getY(),null);
+            g.drawImage(enemyImages[3   ],(int)e.getX(),(int)e.getY(),null);
         }
 
 }
