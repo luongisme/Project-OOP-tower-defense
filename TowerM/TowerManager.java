@@ -25,14 +25,18 @@ public class TowerManager {
         towerImages[0] = atlas.getSubimage(64*6, 64, 64, 64); 
     }
     public void update() {
-        attackEnemyIfClose();
-    }
-    private void attackEnemyIfClose() {
         for (Tower t : towers) {
+            t.update();
+            attackEnemyIfClose(t);
+        }
+    }
+    private void attackEnemyIfClose(Tower t) {
             for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
                 if(e.isAlive())
                 if(isEnemyInRange(t, e)) {
-                    e.hurt(1);
+                    if(t.isCoolDownOver()) {
+                        playing.shootEnemy(t, e); 
+                        t.resetCooldown();
                     }else{
                         //do nothing
                     }

@@ -1,8 +1,8 @@
 package TowerM;
 
 public class Tower {
-    private int x, y, id, towerType;
-    private float damage, range, cooldown;
+    private int x, y, id, towerType, cooldownTick, damage;
+    private float range, cooldown;
 
     public Tower(int x, int y, int id, int towerType) {
         this.x = x;
@@ -48,7 +48,7 @@ public class Tower {
     public void setTowerType(int towerType) {
         this.towerType = towerType;
     }
-    public float getDamage() {
+    public int getDamage() {
         return damage;
     }
     public float getRange() {
@@ -56,5 +56,16 @@ public class Tower {
     }  
     public float getCooldown() {
         return cooldown;
+    }
+
+    public void resetCooldown() {
+        cooldownTick = 0;
+    }
+
+    public boolean isCoolDownOver() {
+        return cooldownTick >= cooldown;
+    }
+    public void update(){
+        cooldownTick++;
     }
 }

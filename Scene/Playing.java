@@ -1,9 +1,11 @@
 package Scene;
 
 import Enemy.EnemyManaging;
+import Enemy.GeneralEnemy;
 import static HelperMethod.Constant.Tiles.GRASS_TOWER_TILE;
 import HelperMethod.LevelBuild;
 import Main.Game;
+import Projectile.ProjectileManager;
 import Tile.Tile;
 import Tile.TileManager;
 import TowerM.Tower;
@@ -33,6 +35,8 @@ public class Playing extends GameScene implements SceneMethods{
 
     private Tower selectedTower;
 
+    private ProjectileManager projectileManager;
+
     private int animationIndex;
     
     private int tick;
@@ -46,6 +50,7 @@ public class Playing extends GameScene implements SceneMethods{
         bottomBar = new BottomBar(0, 740, 1024, 150, this);//starting at x = 0, y =740(screen)
         enemyManaging = new EnemyManaging(this);
         towerManager = new TowerManager(this);
+        projectileManager = new ProjectileManager(this);
     }
 
 
@@ -58,6 +63,8 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging.draw(g);
         updateTick();
         towerManager.draw(g);
+        projectileManager.draw(g);
+
         drawSelectedTower(g);
         drawHighlight(g);
     }
@@ -72,12 +79,12 @@ public class Playing extends GameScene implements SceneMethods{
     private void drawSelectedTower(Graphics g){
         if(selectedTower != null){
             g.drawImage(towerManager.getTowerImages()[selectedTower.getTowerType()], mouseX, mouseY, null);
-            //g.drawImage(TowerManager.getTowerImage(0){selectedTower.getTowerType()}, mouseX, mouseY, null);
     }
     }
     public void update(){
         enemyManaging.update();
         towerManager.update();
+        projectileManager.update();
     }
 
     public void updateTick(){
@@ -232,5 +239,11 @@ public class Playing extends GameScene implements SceneMethods{
     }
     public EnemyManaging getEnemyManaging() {
         return enemyManaging;
+    }
+
+
+
+    public void shootEnemy(Tower t, GeneralEnemy e) {
+        projectileManager.newProjectile(t, e);
     }
 }

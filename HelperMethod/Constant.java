@@ -17,7 +17,7 @@ public class Constant {
 
     public static class Towers{
         public static final int TOWER1 = 0;
-		public static float GetDefaultDamage(int towerType) {
+		public static int GetDefaultDamage(int towerType) {
 			return 30;
     	}
 		public static float GetDefaultRange(int towerType) {

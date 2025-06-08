@@ -25,6 +25,7 @@ public class GeneralEnemy {
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
 
 
+
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
@@ -99,11 +100,13 @@ public class GeneralEnemy {
                 this.y-=speed;
                 break;
         }
+        updateHitBox();
     }
     // get start health
     public void updateHitBox(){
         hitbox.x=(int)x;
         hitbox.y=(int)y;
+
     }
 
     public boolean ReachedEnd(int[][] lvl){
