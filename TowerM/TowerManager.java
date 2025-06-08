@@ -25,24 +25,20 @@ public class TowerManager {
         towerImages[0] = atlas.getSubimage(64*6, 64, 64, 64); 
     }
     public void update() {
-        for (Tower t : towers) {
-            t.update(); // update cooldown timer
-        }
         attackEnemyIfClose();
     }
-
     private void attackEnemyIfClose() {
         for (Tower t : towers) {
-            if (!t.canShoot()) continue;
             for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
-                if(e.isAlive() && isEnemyInRange(t, e)) {
-                    e.hurt((int)t.getDamage());
-                    t.resetCooldown();
-                    break; // Only shoot one enemy per cooldown
+                if(e.isAlive())
+                if(isEnemyInRange(t, e)) {
+                    e.hurt(1);
+                    }else{
+                        //do nothing
+                    }
                 }
             }
         }
-    }
     private boolean isEnemyInRange(Tower t, GeneralEnemy e) {
         int range = HelperMethod.Utilz.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
         return range < t.getRange();
