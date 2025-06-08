@@ -4,7 +4,7 @@ public class Constant {
 
 	public static class Projectile{
 		public static final int LASER = 0;
-
+		
 		public static float GetSpeed(int type){
 			switch (type) {
 			case LASER:

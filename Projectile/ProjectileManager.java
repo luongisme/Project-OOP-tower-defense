@@ -10,7 +10,7 @@ import HelperMethod.LoadSave;
 import Scene.Playing;
 import TowerM.Tower;
 import static HelperMethod.Constant.Towers.*;
-import static HelperMethod.Constant.Projectiles.*;
+import static HelperMethod.Constant.Projectile.*;
 
 
 
@@ -48,7 +48,7 @@ public class ProjectileManager {
     }
     private boolean isProjectileHittingEnemy(Projectile p) {
         for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
-            if(e.getBounds().contains(p.getPosition())) {
+            if(e.getHitBox().contains(p.getPosition())) {
                 e.hurt(p.getDamage());
                 return true; // Hit detected
             }
@@ -72,8 +72,8 @@ public class ProjectileManager {
         float xPercent = (float) xDistance / towerDistance;
        // float yPercent = 1.0f - xPercent; // Ensure yPercent is the complement of xPercent
 
-        float xSpeed = xPercent * HelperMethod.Constant.Projectiles.GetSpeed(type);
-        float ySpeed = HelperMethod.Constant.Projectiles.GetSpeed(type) - xSpeed;
+        float xSpeed = xPercent * HelperMethod.Constant.Projectile.GetSpeed(type);
+        float ySpeed = HelperMethod.Constant.Projectile.GetSpeed(type) - xSpeed;
 
         if(t.getX() < e.getX()) {
             xSpeed *= -1; // Adjust speed direction based on tower position
