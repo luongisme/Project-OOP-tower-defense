@@ -22,8 +22,10 @@ package Enemy;
 
         public void update(){
             for (GeneralEnemy e:enemies ){
+                if(e.isAlive){}{
                 e.updateAnimation(); // update animation frame
                 isNextTileRoad(e);
+            }
             }
         }   
 
@@ -118,8 +120,10 @@ package Enemy;
 
         public void draw(Graphics g){
             for (GeneralEnemy e: enemies){
+                if(e.isAlive){
                 drawEnemyImages(e, g);
                 e.drawHealthBar(g);
+                }
             }
         }
 
@@ -137,6 +141,10 @@ package Enemy;
             int type = 0;
             int frame = e.getAnimationIndex();
             g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
+        }
+
+        public ArrayList<GeneralEnemy> getEnemies() {
+            return enemies;
         }
 
 }

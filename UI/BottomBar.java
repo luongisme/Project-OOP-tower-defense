@@ -27,7 +27,7 @@ public class BottomBar {
         this.playing = playing;
 
         initButtons();
-
+        
     }
 
     public void draw(Graphics g){
@@ -37,8 +37,14 @@ public class BottomBar {
 
         //button
         drawButtons(g);
+        //drawDisplayedTowerRange(g);
     }
-
+        // Draw the range of the displayed tower
+    public void drawDisplayedTowerRange(Graphics g) {
+            g.setColor(Color.BLACK);
+            g.drawOval(selectedTower.getX() + 32 - (int) selectedTower.getRange() / 2, selectedTower.getY() + 32 - (int) selectedTower.getRange() / 2, (int) (selectedTower.getRange() * 2), (int) (selectedTower.getRange() * 2));
+        }
+        
     private void initButtons() {
 
         bMenu = new MyButton("Menu", 2, 772, 100, 65);

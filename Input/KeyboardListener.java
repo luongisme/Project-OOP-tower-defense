@@ -1,13 +1,12 @@
 package Input;
 
+import Main.Game;
 import Main.GameStates;
-
+import static Main.GameStates.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import static Main.GameStates.*;
-import Main.GameStates;
 public class KeyboardListener implements KeyListener {
+    private Game game;
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -22,6 +21,11 @@ public class KeyboardListener implements KeyListener {
         }else if (e.getKeyCode() == KeyEvent.VK_S){
             GameStates.gameState = SETTINGS;
         }
+        /* deselect tower when pressing esc
+        else if(GameStates.gameState == PLAYING){
+            game.getPlaying().keyPressed(e);
+        }
+        */
     }
 
     @Override

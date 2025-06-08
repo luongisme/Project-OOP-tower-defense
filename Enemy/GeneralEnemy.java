@@ -1,15 +1,15 @@
 package Enemy;
 
+import static HelperMethod.Constant.Direction.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import static HelperMethod.Constant.Direction.*;
 
 public class GeneralEnemy {
     private float x,y;
     protected int hp;
     protected int speed;
-    protected boolean isAlive;
+    protected boolean isAlive = true;
     protected boolean isHit;
     protected boolean reachEnd;
     protected int lastDirection;
@@ -23,6 +23,7 @@ public class GeneralEnemy {
     protected int animationTick = 0;
     protected int animationSpeed = 10; // Lower is faster
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
+
 
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
@@ -43,6 +44,7 @@ public class GeneralEnemy {
         this.hitbox= new Rectangle((int)x, (int) y, 64, 64);
         this.firstDirection=Direction.RIGHT;//when the game start, the enemy set default to go right
     }
+
 
     public void drawHealthBar(Graphics g){//draw health bar method
         int barX=(int) x;
@@ -142,8 +144,6 @@ public class GeneralEnemy {
         return lastDirection;
     }
 
-    
-
     public void updateAnimation() {
         animationTick++;
         if (animationTick >= animationSpeed) {
@@ -159,4 +159,21 @@ public class GeneralEnemy {
         return animationIndex;
     }
 
+    public void hurt(int damage) {
+        this.hp -= damage;
+        if (this.hp <= 0) {
+            this.isAlive = false;
+            this.hp = 0;
+        }
+        this.isHit = true;
+    }
+    public boolean isAlive() {
+        return isAlive;
+    }
+    
+    /* 
+    protected void setStartHealth(){
+        HelperMethod.Constant.Enemies.GetStartHealth(enemyType);
+    }
+    */
 }

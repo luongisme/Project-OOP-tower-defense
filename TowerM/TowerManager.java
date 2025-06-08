@@ -1,4 +1,5 @@
 package TowerM;
+import Enemy.GeneralEnemy;
 import HelperMethod.LoadSave;
 import Scene.Playing;
 import java.awt.Graphics;
@@ -24,8 +25,25 @@ public class TowerManager {
         towerImages[0] = atlas.getSubimage(64*6, 64, 64, 64); 
     }
     public void update() {
-        
+        attackEnemyIfClose();
     }
+    private void attackEnemyIfClose() {
+        for (Tower t : towers) {
+            for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
+                if(e.isAlive())
+                if(isEnemyInRange(t, e)) {
+                    e.hurt(1);
+                    }else{
+                        //do nothing
+                    }
+                }
+            }
+        }
+    private boolean isEnemyInRange(Tower t, GeneralEnemy e) {
+        int range = HelperMethod.Utilz.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+        return range < t.getRange();
+    }
+
     public void draw(Graphics g) {
         for (Tower t : towers) {
             g.drawImage(towerImages[t.getTowerType()], t.getX(), t.getY(), null); 

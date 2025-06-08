@@ -2,11 +2,31 @@ package HelperMethod;
 
 public class Constant {
 
+	public static class Projectile{
+		public static final int LASER = 0;
+
+		public static float GetSpeed(int type){
+			switch (type) {
+			case LASER:
+				return 0.5f;
+			}
+			return 0f;
+
+		}
+	}
+
     public static class Towers{
         public static final int TOWER1 = 0;
-    } 
-
-
+		public static float GetDefaultDamage(int towerType) {
+			return 30;
+    	}
+		public static float GetDefaultRange(int towerType) {
+			return 100;
+		}
+		public static float GetDefaultCooldown(int towerType) {
+			return 10;
+		} 
+}
     public static class Direction{
     public static final int LEFT=0;
     public static final int RIGHT=1;
@@ -24,7 +44,8 @@ public class Constant {
         public static final int GRASS_TOWER_TILE=6;
     }
 
-    public static final int ORC = 0;
+    public static class Enemies{
+		public static final int ORC = 0;
 		public static final int BAT = 1;
 		public static final int KNIGHT = 2;
 		public static final int WOLF = 3;
@@ -70,6 +91,7 @@ public class Constant {
 			}
 			return 0;
 		}
+}
 }
 
 

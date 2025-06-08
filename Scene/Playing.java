@@ -59,7 +59,15 @@ public class Playing extends GameScene implements SceneMethods{
         updateTick();
         towerManager.draw(g);
         drawSelectedTower(g);
+        drawHighlight(g);
     }
+
+    private void drawHighlight(Graphics g) {
+        g.setColor(Color.WHITE);
+       g.drawRect(mouseX, mouseY, 64, 64);
+    }
+
+
 
     private void drawSelectedTower(Graphics g){
         if(selectedTower != null){
@@ -165,7 +173,13 @@ public class Playing extends GameScene implements SceneMethods{
         int tileType = getGame().getTileManager().getTile(id).getTileType();
         return tileType ==  GRASS_TOWER_TILE;
      }
-
+     /* 
+     public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            selectedTower = null; // Deselect tower
+        }
+    }
+        */
     @Override
     public void mouseMoved(int x, int y) {
         if(y >= 740){
@@ -215,5 +229,8 @@ public class Playing extends GameScene implements SceneMethods{
 
     public TowerManager getTowerManager() {
         return towerManager;
+    }
+    public EnemyManaging getEnemyManaging() {
+        return enemyManaging;
     }
 }
