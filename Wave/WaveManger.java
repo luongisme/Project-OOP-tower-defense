@@ -16,6 +16,9 @@ public class WaveManger {
     }
 
     private void waves() {
+        // Remove dead enemies from the list
+        enemies.removeIf(e -> !e.isAlive());
+
         // Handle enemy waves spawning
         if (enemies.isEmpty() && enemiesInCurrentWave == 0 && currentWave < waveEnemyCounts.length) {
             // Prepare for the next wave
@@ -34,9 +37,12 @@ public class WaveManger {
     }
 
     private void enemyTypeRandom() {
-        // Example: spawn a random type of enemy at a fixed position
-        int type = (int) (Math.random() * 3); // 0, 1, or 2
-        enemies.add(new GeneralEnemy(0, 64 * 11)); // You can extend this to use type if needed
+       
+        int[] allowedTypes = {0, 1, 3};
+        int type = allowedTypes[(int) (Math.random() * allowedTypes.length)];
+        GeneralEnemy enemy = new GeneralEnemy(0, 64 * 11,type); // Extend to use 'type' if supported
+        
+        enemies.add(enemy);
     }
 
     public ArrayList<GeneralEnemy> getEnemies() {

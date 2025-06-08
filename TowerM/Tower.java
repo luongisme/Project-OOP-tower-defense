@@ -3,6 +3,7 @@ package TowerM;
 public class Tower {
     private int x, y, id, towerType;
     private float damage, range, cooldown;
+    private float cooldownTimer = 0;
 
     public Tower(int x, int y, int id, int towerType) {
         this.x = x;
@@ -56,5 +57,16 @@ public class Tower {
     }  
     public float getCooldown() {
         return cooldown;
+    }
+    public void update() {
+        if (cooldownTimer > 0) {
+            cooldownTimer--;
+        }
+    }
+    public boolean canShoot() {
+        return cooldownTimer <= 0;
+    }
+    public void resetCooldown() {
+        cooldownTimer = cooldown;
     }
 }

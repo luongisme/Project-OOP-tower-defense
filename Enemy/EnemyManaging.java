@@ -6,21 +6,27 @@ package Enemy;
     import java.awt.Graphics;
     import java.awt.image.BufferedImage;
     import java.util.ArrayList;
+    import Wave.WaveManger;
 
     public class EnemyManaging {
         private Playing playing;
         private BufferedImage[][] enemyImages; // [enemyType][frame]
         ArrayList<GeneralEnemy> enemies=new ArrayList<>();
         private float speed=0.6f;
+        private WaveManger wave; 
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
             enemyImages= new BufferedImage[4][10]; // 4 enemy types, 10 frames each
-            addEnemy();
+            this.wave= new WaveManger();
             loadEnemyImages();
         }
 
         public void update(){
+            wave.update();
+            ArrayList<GeneralEnemy> waveEnemies = wave.getEnemies();
+            enemies.clear();
+            enemies.addAll(waveEnemies);
             for (GeneralEnemy e:enemies ){
                 if(e.isAlive){}{
                 e.updateAnimation(); // update animation frame
@@ -30,10 +36,10 @@ package Enemy;
         }   
 
         public void isNextTileRoad(GeneralEnemy e){
-            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
-            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
+            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection(), e));
+            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection(), e));
             if  (getTileType(newX, newY) == ROAD_TILE){
-                e.move(speed, e.getLastDirection());
+                e.move(e.getSpeed(), e.getLastDirection());
             }
             else if(isAtEnd(e)){
             }
@@ -52,27 +58,27 @@ package Enemy;
             // Try all directions to find a valid road tile
 
             if (direction == LEFT || direction == RIGHT) {
-                int newY = (int) (e.getY() + getSpeedY(UP));
+                int newY = (int) (e.getY() + getSpeedY(UP, e));
 
                 if (getTileType((int) e.getX(), newY) == ROAD_TILE) {
-                    e.move(speed, UP);
+                    e.move(e.getSpeed(), UP);
                     e.lastDirection = UP;
 
-                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN))) == ROAD_TILE) {
-                    e.move(speed, DOWN);
+                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN, e))) == ROAD_TILE) {
+                    e.move(e.getSpeed(), DOWN);
                     e.lastDirection = DOWN;
 
                 }
             } else {
 
-                int newX = (int) (e.getX() + getSpeedX(RIGHT));
+                int newX = (int) (e.getX() + getSpeedX(RIGHT, e));
 
                 if (getTileType(newX, (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, RIGHT);
+                    e.move(e.getSpeed(), RIGHT);
                     e.lastDirection = RIGHT;
 
-                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT)), (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, LEFT);
+                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT, e)), (int) e.getY()) == ROAD_TILE) {
+                    e.move(e.getSpeed(), LEFT);
                     e.lastDirection = LEFT;
 
                 }
@@ -102,20 +108,18 @@ package Enemy;
             return playing.getTileType(x, y);
         }
 
-        private float getSpeedX(int direction){
-            if (direction == LEFT) return -speed;
-            if (direction == RIGHT) return speed+64;
+        private float getSpeedX(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == LEFT) return -s;
+            if (direction == RIGHT) return s+64;
             return 0;
         }
 
-        private float getSpeedY(int direction){
-            if (direction == UP) return -speed;
-            if (direction == DOWN) return speed+64;
+        private float getSpeedY(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == UP) return -s;
+            if (direction == DOWN) return s+64;
             return 0;
-        }
-
-        public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,64*11));// the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
@@ -138,7 +142,7 @@ package Enemy;
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
             // For now always use type 0,1,3 
-            int type = 0;
+            int type = e.getType();
             int frame = e.getAnimationIndex();
             g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
         }

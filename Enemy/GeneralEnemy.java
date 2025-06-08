@@ -4,11 +4,12 @@ import static HelperMethod.Constant.Direction.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import static HelperMethod.Constant.Enemies.*;
 
 public class GeneralEnemy {
     private float x,y;
     protected int hp;
-    protected int speed;
+    protected float speed;
     protected boolean isAlive = true;
     protected boolean isHit;
     protected boolean reachEnd;
@@ -24,6 +25,8 @@ public class GeneralEnemy {
     protected int animationSpeed = 10; // Lower is faster
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
 
+    private int type;
+
 
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
@@ -31,12 +34,13 @@ public class GeneralEnemy {
 
     public static final int TILE_SIZE=64;
 
-    public GeneralEnemy(float x,float y){
+    public GeneralEnemy(float x,float y,int type){
         this.x=x;
         this.y=y;
-        this.hp=10;
+        this.type=type;
+        this.hp=GetStartHealth(type);
         this.lastDirection=1; // RIGHT
-        this.speed=1;
+        this.speed=GetSpeed(type);
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -169,6 +173,14 @@ public class GeneralEnemy {
     }
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public int getType(){
+        return type;
+    }
+    
+    public float getSpeed() {
+        return speed;
     }
     
     /* 
