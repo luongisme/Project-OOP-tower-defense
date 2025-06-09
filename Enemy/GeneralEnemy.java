@@ -24,6 +24,9 @@ public class GeneralEnemy {
     protected int animationSpeed = 10; // Lower is faster
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
 
+    //private int maxhealth;
+    //private int health;
+
 
 
     public enum Direction{
@@ -80,12 +83,12 @@ public class GeneralEnemy {
     }
 
     public void setPos(int x, int y) {
-
 		this.x = x;
 		this.y = y;
 	}
 
     public void move(float speed,int Direction){
+        //lastDirection=Direction;
         switch (Direction) {
             case LEFT:
                 this.x-=speed;
@@ -164,19 +167,24 @@ public class GeneralEnemy {
 
     public void hurt(int damage) {
         this.hp -= damage;
-        if (this.hp <= 0) {
-            this.isAlive = false;
-            this.hp = 0;
+        if (hp <= 0) {
+            isAlive = false;
+            hp = 0;
         }
         this.isHit = true;
     }
     public boolean isAlive() {
         return isAlive;
     }
-    
+    /* 
+    public float getHealthBarFloat(){
+        return health/(float) maxhealth;
+    }
+    */
     /* 
     protected void setStartHealth(){
-        HelperMethod.Constant.Enemies.GetStartHealth(enemyType);
+        health = HelperMethod.Constant.Enemies.GetStartHealth(enemyType);
+        maxhealth = health;
     }
     */
 }

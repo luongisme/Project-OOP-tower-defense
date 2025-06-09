@@ -60,8 +60,8 @@ public class Playing extends GameScene implements SceneMethods{
         drawLevel(g); // Use the animated drawLevel method
         bottomBar.draw(g);
         drawSelectedTile(g);
-        enemyManaging.draw(g);
         updateTick();
+        enemyManaging.draw(g);
         towerManager.draw(g);
         projectileManager.draw(g);
 
@@ -82,6 +82,7 @@ public class Playing extends GameScene implements SceneMethods{
     }
     }
     public void update(){
+        //updateTick();
         enemyManaging.update();
         towerManager.update();
         projectileManager.update();
@@ -240,8 +241,6 @@ public class Playing extends GameScene implements SceneMethods{
     public EnemyManaging getEnemyManaging() {
         return enemyManaging;
     }
-
-
 
     public void shootEnemy(Tower t, GeneralEnemy e) {
         projectileManager.newProjectile(t, e);

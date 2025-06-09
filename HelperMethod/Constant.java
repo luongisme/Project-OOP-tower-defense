@@ -5,8 +5,8 @@ public class Constant {
 	public static class Projectile{
 		public static final int LASER = 0;
 		
-		public static float GetSpeed(int type){
-			switch (type) {
+		public static float GetSpeed(int projectileType){
+			switch (projectileType) {
 			case LASER:
 				return 0.5f;
 			}
@@ -18,13 +18,25 @@ public class Constant {
     public static class Towers{
         public static final int TOWER1 = 0;
 		public static int GetDefaultDamage(int towerType) {
-			return 30;
+			switch(towerType){
+				case TOWER1:
+					return 30;
+			}
+			return 0;
     	}
 		public static float GetDefaultRange(int towerType) {
-			return 100;
+			switch(towerType){
+				case TOWER1:
+					return 100;
+			}
+			return 0;
 		}
 		public static float GetDefaultCooldown(int towerType) {
-			return 10;
+			switch(towerType){
+				case TOWER1:
+					return 30;
+			}
+			return 0;
 		} 
 }
     public static class Direction{

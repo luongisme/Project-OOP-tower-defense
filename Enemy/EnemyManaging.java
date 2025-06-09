@@ -3,15 +3,17 @@ package Enemy;
     import static HelperMethod.Constant.Tiles.ROAD_TILE;
     import HelperMethod.LoadSave;
     import Scene.Playing;
-    import java.awt.Graphics;
-    import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
     import java.util.ArrayList;
 
     public class EnemyManaging {
         private Playing playing;
         private BufferedImage[][] enemyImages; // [enemyType][frame]
-        ArrayList<GeneralEnemy> enemies=new ArrayList<>();
+        private ArrayList<GeneralEnemy> enemies = new ArrayList<>();
         private float speed=0.6f;
+
+        //private int HPbarWidth = 50;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
@@ -22,9 +24,9 @@ package Enemy;
 
         public void update(){
             for (GeneralEnemy e:enemies ){
-                if(e.isAlive){}{
-                e.updateAnimation(); // update animation frame
-                isNextTileRoad(e);
+                if(e.isAlive){}{                    
+                    e.updateAnimation(); // update animation frame
+                    isNextTileRoad(e);
             }
             }
         }   
@@ -121,8 +123,8 @@ package Enemy;
         public void draw(Graphics g){
             for (GeneralEnemy e: enemies){
                 if(e.isAlive){
-                drawEnemyImages(e, g);
-                e.drawHealthBar(g);
+                    drawEnemyImages(e, g);
+                    e.drawHealthBar(g);//drawHealthBar(e, g);
                 }
             }
         }
@@ -146,5 +148,13 @@ package Enemy;
         public ArrayList<GeneralEnemy> getEnemies() {
             return enemies;
         }
-
+        /* 
+        public void drawHealthBar(GeneralEnemy e, Graphics g){//draw health bar method
+            g.setColor(Color.red);
+            g.fillRect((int)e.getX() + 32 - (HPbarWidth / 2),(int)e.getY() - 10, HPbarWidth, 3);
+        }
+        public int getNewBarWidth(GeneralEnemy e) {
+            return (int) ((int) HPbarWidth * e.getHealthBarFloat());
+        }
+            */
 }

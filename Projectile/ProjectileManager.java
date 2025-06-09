@@ -1,16 +1,14 @@
 package Projectile;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.nio.Buffer;
-
 import Enemy.GeneralEnemy;
+import static HelperMethod.Constant.Projectile.*;
+import static HelperMethod.Constant.Towers.*;
 import HelperMethod.LoadSave;
 import Scene.Playing;
 import TowerM.Tower;
-import static HelperMethod.Constant.Towers.*;
-import static HelperMethod.Constant.Projectile.*;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 
@@ -22,16 +20,15 @@ public class ProjectileManager {
 
     public ProjectileManager(Playing playing){
         this.playing = playing;
+        importProjectileImages();
     }
-    /* 
+    
     private void importProjectileImages() {
         BufferedImage atlas = LoadSave.getSpriteAtlas();
-        projectileImages = new BufferedImage[3];
+        projectileImages = new BufferedImage[1];
         projectileImages[0] = atlas.getSubimage(64*6, 64*2, 64, 64); // Example image for projectile type 0
-        projectileImages[1] = atlas.getSubimage(64*6, 64*3, 64, 64); // Example image for projectile type 1
-        projectileImages[2] = atlas.getSubimage(64*6, 64*4, 64, 64); // Example image for projectile type 2
     }
-        */
+        
     public void update(){
         for(Projectile p : projectiles) {
             if(p.isActive()) {
@@ -72,17 +69,17 @@ public class ProjectileManager {
         float xPercent = (float) xDistance / towerDistance;
        // float yPercent = 1.0f - xPercent; // Ensure yPercent is the complement of xPercent
 
-        float xSpeed = xPercent * HelperMethod.Constant.Projectile.GetSpeed(type);
-        float ySpeed = HelperMethod.Constant.Projectile.GetSpeed(type) - xSpeed;
+        float xSpeed = xPercent * HelperMethod.Constant.Projectile.GetSpeed(getProjectileType(t)); //type
+        float ySpeed = HelperMethod.Constant.Projectile.GetSpeed(getProjectileType(t)) - xSpeed; //type
 
-        if(t.getX() < e.getX()) {
+        if(t.getX() > e.getX()) {
             xSpeed *= -1; // Adjust speed direction based on tower position
         }
-        if(t.getY() < e.getY()) {
+        if(t.getY() > e.getY()) {
             ySpeed *= -1; // Adjust speed direction based on tower position
         }
 
-        projectiles.add(new Projectile(t.getX() + 32, t.getY() + 32, xSpeed, ySpeed, t.getDamage(), projectileID++, type));
+        projectiles.add(new Projectile(t.getX() + 32, t.getY() + 32, xSpeed, ySpeed, t.getDamage(), projectileID++, getProjectileType(t))); //type
     }
     private int getProjectileType(Tower t) {
         switch (t.getTowerType()) {
@@ -92,7 +89,7 @@ public class ProjectileManager {
         return 0;
     }
 
-
+    
 
 }
 
