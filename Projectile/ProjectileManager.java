@@ -26,7 +26,7 @@ public class ProjectileManager {
     private void importProjectileImages() {
         BufferedImage atlas = LoadSave.getSpriteAtlas();
         projectileImages = new BufferedImage[1];
-        projectileImages[0] = atlas.getSubimage(64*6, 64*2, 64, 64); // Example image for projectile type 0
+        projectileImages[0] = atlas.getSubimage(64*6, 0, 64, 64); // Example image for projectile type 0
     }
         
     public void update(){
@@ -76,12 +76,12 @@ public class ProjectileManager {
             ySpeed *= -1; // Adjust speed direction based on tower position
         }
 
-        projectiles.add(new Projectile(t.getX() + 32, t.getY() + 32, xSpeed, ySpeed, t.getDamage(), projectileID++, getProjectileType(t))); //type
+        projectiles.add(new Projectile(t.getX() , t.getY() , xSpeed, ySpeed, t.getDamage(), projectileID++, getProjectileType(t))); //type
     }
     private int getProjectileType(Tower t) {
         switch (t.getTowerType()) {
             case TOWER1:
-                return LASER;
+                return CANNON;
         }
         return 0;
     }

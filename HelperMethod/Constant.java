@@ -3,12 +3,12 @@ package HelperMethod;
 public class Constant {
 
 	public static class Projectile{
-		public static final int LASER = 0;
+		public static final int CANNON = 0;
 		
 		public static float GetSpeed(int projectileType){
 			switch (projectileType) {
-			case LASER:
-				return 3f;
+			case CANNON:
+				return 5f;
 			}
 			return 0f;
 
@@ -27,7 +27,7 @@ public class Constant {
 		public static float GetDefaultRange(int towerType) {
 			switch(towerType){
 				case TOWER1:
-					return 100;
+					return 150;
 			}
 			return 0;
 		}
