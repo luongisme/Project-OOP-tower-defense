@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static HelperMethod.Constant.Tiles.*;
 
 public class TileManager {
-    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK,WATER,GRASS_TOWER;
+    public Tile GRASS,TREE,ROAD,CAMP,TOWER,ARCHER,ORC,SHARK,WATER,GRASS_TOWER,HOME;
     public BufferedImage atlas;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
@@ -28,6 +28,7 @@ public class TileManager {
         //tiles.add(SHARK = new Tile(getSprite(0, 8), id++,"Shark"));
         tiles.add(WATER = new Tile(getSpriteAnimations(0,15), id++,WATER_TILE ,false));
         tiles.add(GRASS_TOWER = new Tile(getSprite(3,6),id++,GRASS_TOWER_TILE,true));
+        tiles.add(HOME = new Tile(getSprite(2,6),id++,HOME_TILE,false));
     }
 
     private void loadAtlas() {

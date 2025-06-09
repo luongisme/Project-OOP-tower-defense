@@ -54,6 +54,7 @@ public class Constant {
         public static final int TOWER_TILE=4;
         public static final int ROAD_TILE=5;
         public static final int GRASS_TOWER_TILE=6;
+		public static final int HOME_TILE=7;
     }
 
     public static class Enemies{
