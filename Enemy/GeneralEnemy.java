@@ -1,14 +1,16 @@
 package Enemy;
 
 import static HelperMethod.Constant.Direction.*;
+import static HelperMethod.Constant.Enemies.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class GeneralEnemy {
+public abstract class GeneralEnemy {
     private float x,y;
     protected int hp;
-    protected int speed;
+    private int id;
+    protected float speed;
     protected boolean isAlive = true;
     protected boolean isHit;
     protected boolean reachEnd;
@@ -35,12 +37,13 @@ public class GeneralEnemy {
 
     public static final int TILE_SIZE=64;
 
-    public GeneralEnemy(float x,float y){
+    public GeneralEnemy(float x,float y,int id){
+        this.id=id;
         this.x=x;
         this.y=y;
-        this.hp=10;
+        this.hp=GetStartHealth(id);
         this.lastDirection=1; // RIGHT
-        this.speed=1;
+        this.speed=GetSpeed(id);
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -175,6 +178,13 @@ public class GeneralEnemy {
     }
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public int getID(){
+        return id;
+    }
+    public float getSpeed() {
+        return speed;
     }
     /* 
     public float getHealthBarFloat(){

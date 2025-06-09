@@ -1,24 +1,22 @@
 package Enemy;
-    import static HelperMethod.Constant.Direction.*;
-    import static HelperMethod.Constant.Tiles.ROAD_TILE;
-    import HelperMethod.LoadSave;
-    import Scene.Playing;
+import static HelperMethod.Constant.Direction.*;
+import static HelperMethod.Constant.Enemies.*;
+import static HelperMethod.Constant.Tiles.ROAD_TILE;
+import HelperMethod.LoadSave;
+import Scene.Playing;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-    import java.util.ArrayList;
+import java.util.ArrayList;
 
     public class EnemyManaging {
         private Playing playing;
         private BufferedImage[][] enemyImages; // [enemyType][frame]
         private ArrayList<GeneralEnemy> enemies = new ArrayList<>();
-        private float speed=0.6f;
-
-        //private int HPbarWidth = 50;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
             enemyImages= new BufferedImage[4][10]; // 4 enemy types, 10 frames each
-            addEnemy();
+            addEnemy(1);
             loadEnemyImages();
         }
 
@@ -32,10 +30,10 @@ import java.awt.image.BufferedImage;
         }   
 
         public void isNextTileRoad(GeneralEnemy e){
-            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
-            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
+            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection(), e));
+            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection(), e));
             if  (getTileType(newX, newY) == ROAD_TILE){
-                e.move(speed, e.getLastDirection());
+                e.move(e.getSpeed(), e.getLastDirection());
             }
             else if(isAtEnd(e)){
             }
@@ -54,27 +52,27 @@ import java.awt.image.BufferedImage;
             // Try all directions to find a valid road tile
 
             if (direction == LEFT || direction == RIGHT) {
-                int newY = (int) (e.getY() + getSpeedY(UP));
+                int newY = (int) (e.getY() + getSpeedY(UP, e));
 
                 if (getTileType((int) e.getX(), newY) == ROAD_TILE) {
-                    e.move(speed, UP);
+                    e.move(e.getSpeed(), UP);
                     e.lastDirection = UP;
 
-                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN))) == ROAD_TILE) {
-                    e.move(speed, DOWN);
+                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN, e))) == ROAD_TILE) {
+                    e.move(e.getSpeed(), DOWN);
                     e.lastDirection = DOWN;
 
                 }
             } else {
 
-                int newX = (int) (e.getX() + getSpeedX(RIGHT));
+                int newX = (int) (e.getX() + getSpeedX(RIGHT, e));
 
                 if (getTileType(newX, (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, RIGHT);
+                    e.move(e.getSpeed(), RIGHT);
                     e.lastDirection = RIGHT;
 
-                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT)), (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, LEFT);
+                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT, e)), (int) e.getY()) == ROAD_TILE) {
+                    e.move(e.getSpeed(), LEFT);
                     e.lastDirection = LEFT;
 
                 }
@@ -104,20 +102,33 @@ import java.awt.image.BufferedImage;
             return playing.getTileType(x, y);
         }
 
-        private float getSpeedX(int direction){
-            if (direction == LEFT) return -speed;
-            if (direction == RIGHT) return speed+64;
+        private float getSpeedX(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == LEFT) return -s;
+            if (direction == RIGHT) return s+64;
             return 0;
         }
 
-        private float getSpeedY(int direction){
-            if (direction == UP) return -speed;
-            if (direction == DOWN) return speed+64;
+        private float getSpeedY(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == UP) return -s;
+            if (direction == DOWN) return s+64;// this help fixing the offset problem
             return 0;
         }
 
-        public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,64*11));// the enemy doesnt walk right on the path so i did a little adjustment
+        public void addEnemy(int enemyType){
+            switch (enemyType) {
+                case ORC:
+                    enemies.add(new Orc(0,64*11,ORC));
+                    break;
+                case BEATLE:
+                    enemies.add(new Beatle(0,64*11,BEATLE));
+                    break;
+                case SKELETON:
+                    enemies.add(new Skeleton(0,64*11,SKELETON));
+                    break;
+            }
+            // the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
@@ -139,8 +150,7 @@ import java.awt.image.BufferedImage;
         }
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
-            // For now always use type 0,1,3 
-            int type = 0;
+            int type = e.getID();
             int frame = e.getAnimationIndex();
             g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
         }

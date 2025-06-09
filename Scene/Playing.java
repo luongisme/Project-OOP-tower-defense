@@ -5,6 +5,7 @@ import Enemy.GeneralEnemy;
 import static HelperMethod.Constant.Tiles.GRASS_TOWER_TILE;
 import HelperMethod.LevelBuild;
 import Main.Game;
+import Player.Players;
 import Projectile.ProjectileManager;
 import Tile.Tile;
 import Tile.TileManager;
@@ -41,6 +42,8 @@ public class Playing extends GameScene implements SceneMethods{
     
     private int tick;
 
+    private Players player;
+
     
 
     public Playing(Game game) {
@@ -51,6 +54,7 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging = new EnemyManaging(this);
         towerManager = new TowerManager(this);
         projectileManager = new ProjectileManager(this);
+        player = new Players(90); // Initialize player here
     }
 
 
@@ -64,7 +68,7 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging.draw(g);
         towerManager.draw(g);
         projectileManager.draw(g);
-
+        player.drawMoneyAmount(g);
         drawSelectedTower(g);
         drawHighlight(g);
     }
