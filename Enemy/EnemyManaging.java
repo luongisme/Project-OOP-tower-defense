@@ -4,6 +4,8 @@ import static HelperMethod.Constant.Enemies.*;
 import static HelperMethod.Constant.Tiles.ROAD_TILE;
 import HelperMethod.LoadSave;
 import Scene.Playing;
+import Wave.WaveManger;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -11,21 +13,22 @@ import java.util.ArrayList;
     public class EnemyManaging {
         private Playing playing;
         private BufferedImage[][] enemyImages; // [enemyType][frame]
-        private ArrayList<GeneralEnemy> enemies = new ArrayList<>();
+        private WaveManger wave;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
             enemyImages= new BufferedImage[4][10]; // 4 enemy types, 10 frames each
-            addEnemy(1);
+            wave = new WaveManger();
             loadEnemyImages();
         }
 
         public void update(){
-            for (GeneralEnemy e:enemies ){
-                if(e.isAlive){}{                    
+            wave.update();
+            for (GeneralEnemy e : wave.getEnemies()) {
+                if(e.isAlive){                    
                     e.updateAnimation(); // update animation frame
                     isNextTileRoad(e);
-            }
+                }
             }
         }   
 
@@ -118,24 +121,23 @@ import java.util.ArrayList;
 
         public void addEnemy(int enemyType){
             switch (enemyType) {
-                case ORC:
-                    enemies.add(new Orc(0,64*11,ORC));
+                case SKELETON:
+                    wave.getEnemies().add(new Skeleton(0,64*11,SKELETON));
                     break;
                 case BEATLE:
-                    enemies.add(new Beatle(0,64*11,BEATLE));
+                    wave.getEnemies().add(new Beatle(0,64*11,BEATLE));
                     break;
-                case SKELETON:
-                    enemies.add(new Skeleton(0,64*11,SKELETON));
+                case ORC:
+                    wave.getEnemies().add(new Orc(0,64*11,ORC));
                     break;
             }
-            // the enemy doesnt walk right on the path so i did a little adjustment
         }
 
         public void draw(Graphics g){
-            for (GeneralEnemy e: enemies){
+            for (GeneralEnemy e: wave.getEnemies()){
                 if(e.isAlive){
                     drawEnemyImages(e, g);
-                    e.drawHealthBar(g);//drawHealthBar(e, g);
+                    e.drawHealthBar(g);
                 }
             }
         }
@@ -156,7 +158,7 @@ import java.util.ArrayList;
         }
 
         public ArrayList<GeneralEnemy> getEnemies() {
-            return enemies;
+            return wave.getEnemies();
         }
         /* 
         public void drawHealthBar(GeneralEnemy e, Graphics g){//draw health bar method

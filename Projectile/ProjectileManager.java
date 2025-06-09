@@ -32,15 +32,12 @@ public class ProjectileManager {
     public void update(){
         for(Projectile p : projectiles) {
             if(p.isActive()) {
-                p.move();
                 if(isProjectileHittingEnemy(p)) {
                     p.setActive(false);
-                    //playing.getEnemyManaging().damageEnemy(p.getTargetEnemy(), p.getDamage());
-                }else{
-                    //do nothing
+                } else {
+                    p.move();
                 }
             }
-            p.move();
         }
     }
     private boolean isProjectileHittingEnemy(Projectile p) {
@@ -93,4 +90,4 @@ public class ProjectileManager {
 
 }
 
-    
+

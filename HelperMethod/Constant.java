@@ -8,7 +8,7 @@ public class Constant {
 		public static float GetSpeed(int projectileType){
 			switch (projectileType) {
 			case LASER:
-				return 0.5f;
+				return 3f;
 			}
 			return 0f;
 

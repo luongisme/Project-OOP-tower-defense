@@ -56,31 +56,31 @@ public abstract class GeneralEnemy {
     public void drawHealthBar(Graphics g){//draw health bar method
         int barX=(int) x;
         int barY=(int) y-10;
-        barWidth=50;
+        int maxBarWidth = 50;
+        int currentBarWidth = (int) ((hp / (float)GetStartHealth(id)) * maxBarWidth);
 
-        
-        if(barWidth <= 30 && barWidth >= 20){
+        if(currentBarWidth <= 30 && currentBarWidth >= 20){
             g.setColor(Color.YELLOW);
         }
-        else if(barWidth <= 20 && barWidth >= 10){
+        else if(currentBarWidth <= 20 && currentBarWidth >= 10){
             g.setColor(Color.ORANGE);
         }
-        else if(barWidth <= 10 && barWidth>=0){
+        else if(currentBarWidth <= 10 && currentBarWidth>=0){
             g.setColor(Color.RED);
         }
         else{
             g.setColor(Color.GREEN);
         }
-        g.fillRect(barX+5, barY+15,barWidth,barLength);
+        g.fillRect(barX+5, barY+15, currentBarWidth, barLength);
     }
 
     public void receiveDamage(int damage){
         this.isHit=true;
         this.hp -=damage;
-
         if(this.hp<=0){
             this.isAlive=false;
             this.hp=0;
+            System.out.println("Enemy died! HP: " + hp);
         }
         barWidth -=4*damage;
     }
@@ -173,6 +173,7 @@ public abstract class GeneralEnemy {
         if (hp <= 0) {
             isAlive = false;
             hp = 0;
+            System.out.println("Enemy died! HP: " + hp);
         }
         this.isHit = true;
     }
