@@ -2,7 +2,7 @@ package Enemy;
 import static HelperMethod.Constant.Direction.*;
 import static HelperMethod.Constant.Enemies.*;
 import static HelperMethod.Constant.Tiles.ROAD_TILE;
-import HelperMethod.LoadSave;
+import HelperMethod.LoadImages;
 import Scene.Playing;
 import Wave.WaveManger;
 
@@ -146,7 +146,7 @@ import java.util.ArrayList;
             //  load 10 frames for each enemy type 
             for (int type = 0; type < 4; type++) {
                 for (int frame = 0; frame < 10; frame++) {
-                    enemyImages[type][frame] = LoadSave.getSpriteAtlas().getSubimage(64 * frame, 64 * (2 + type * 5), 64, 64);
+                    enemyImages[type][frame] = LoadImages.getSpriteAtlas().getSubimage(64 * frame, 64 * (2 + type * 5), 64, 64);
                 }
             }
         }

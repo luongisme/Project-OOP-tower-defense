@@ -48,14 +48,6 @@ public class Game extends JFrame implements Runnable {
         gameThread.start();
     }
 
-    private void callUPS() {
-        if(System.currentTimeMillis() - lastTimeUPS >= 1000){
-            System.out.println("UPS: " + updates);
-            updates = 0;
-            lastTimeUPS = System.currentTimeMillis();
-        }
-    }
-
     private void updateGame() {
         playing.update();
     }

@@ -13,7 +13,7 @@ public class BottomBar {
     private MyButton bMenu;
     private Playing playing;
 
-    private Tile selectedT;
+    
 
     //private ArrayList<MyButton> tileButtons = new ArrayList<>();
     private MyButton[] towerButtons;

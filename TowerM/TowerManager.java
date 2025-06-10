@@ -1,6 +1,6 @@
 package TowerM;
 import Enemy.GeneralEnemy;
-import HelperMethod.LoadSave;
+import HelperMethod.LoadImages;
 import Scene.Playing;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -20,7 +20,7 @@ public class TowerManager {
     }
 
     private void loadTowerImages() {
-        BufferedImage atlas = LoadSave.getSpriteAtlas();
+        BufferedImage atlas = LoadImages.getSpriteAtlas();
         towerImages = new BufferedImage[1];
         towerImages[0] = atlas.getSubimage(64*6, 64, 64, 64); 
     }

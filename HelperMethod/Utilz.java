@@ -7,5 +7,7 @@ public class Utilz {
        
         return (int) Math.hypot(xDiff, yDiff);
     }
+
+    
 }
 

@@ -3,7 +3,7 @@ package Projectile;
 import Enemy.GeneralEnemy;
 import static HelperMethod.Constant.Projectile.*;
 import static HelperMethod.Constant.Towers.*;
-import HelperMethod.LoadSave;
+import HelperMethod.LoadImages;
 import Scene.Playing;
 import TowerM.Tower;
 import java.awt.Graphics;
@@ -24,7 +24,7 @@ public class ProjectileManager {
     }
     
     private void importProjectileImages() {
-        BufferedImage atlas = LoadSave.getSpriteAtlas();
+        BufferedImage atlas = LoadImages.getSpriteAtlas();
         projectileImages = new BufferedImage[1];
         projectileImages[0] = atlas.getSubimage(64*6, 0, 64, 64); // Example image for projectile type 0
     }

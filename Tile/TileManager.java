@@ -1,6 +1,6 @@
 package Tile;
 
-import HelperMethod.LoadSave;
+import HelperMethod.LoadImages;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import static HelperMethod.Constant.Tiles.*;
@@ -32,7 +32,7 @@ public class TileManager {
     }
 
     private void loadAtlas() {
-        atlas = LoadSave.getSpriteAtlas();
+        atlas = LoadImages.getSpriteAtlas();
     }
     public BufferedImage getSprite(int id){
         return tiles.get(id).getSprite();
