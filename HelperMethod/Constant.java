@@ -87,7 +87,7 @@ public class Constant {
 		public static float GetSpeed(int enemyType) {
 			switch (enemyType) {
 			case SKELETON:
-				return 1f;
+				return 5f;
 			case BEATLE:
 				return 0.7f;
 			case ORC:

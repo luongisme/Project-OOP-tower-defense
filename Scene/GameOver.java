@@ -3,7 +3,7 @@ package Scene;
 import java.awt.Graphics;
 import Main.Game;
 import UI.MyButton;
-import UI.Mybutton;
+import UI.MyButton;
 import java.awt.Color;
 import java.awt.Font;
 import static Main.GameStates.*;
@@ -17,9 +17,6 @@ public class GameOver extends GameScene implements SceneMethods{
         initButtons();
     }
 
-
-
-
     private void initButtons() {
         int w = 300;
         int h = 200 / 3;
@@ -30,14 +27,11 @@ public class GameOver extends GameScene implements SceneMethods{
         
     }
 
-
-
-
     @Override
     public void render(Graphics g){
         g.setFont(new Font(null, Font.BOLD, 20));
         bQuit.draw(g);
-
+        
         g.setFont(new Font(null, Font.BOLD, 50));
         g.setColor(Color.RED);
         g.drawString("Game Over!", 1280 / 2 - 150, 100);

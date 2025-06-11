@@ -1,6 +1,7 @@
 package Enemy;
 import static HelperMethod.Constant.Direction.*;
 import static HelperMethod.Constant.Enemies.*;
+import static HelperMethod.Constant.Tiles.HOME_TILE;
 import static HelperMethod.Constant.Tiles.ROAD_TILE;
 import HelperMethod.LoadImages;
 import Scene.Playing;
@@ -8,6 +9,7 @@ import Wave.WaveManger;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import Main.GameStates;
 
     public class EnemyManaging {
         private Playing playing;
@@ -34,6 +36,10 @@ import java.util.ArrayList;
         public void isNextTileRoad(GeneralEnemy e){
             int newX = (int) (e.getX() + getSpeedX(e.getLastDirection(), e));
             int newY = (int) (e.getY() + getSpeedY(e.getLastDirection(), e));
+            if  (getTileType(newX, newY)==HOME_TILE){
+                GameStates.SetGameState(GameStates.GAME_OVER);
+                return;
+            }
             if  (getTileType(newX, newY) == ROAD_TILE){
                 e.move(e.getSpeed(), e.getLastDirection());
             }
@@ -104,7 +110,7 @@ import java.util.ArrayList;
         }
 
         private int getTileType(int x, int y){
-            int maxX = 19*64;
+            int maxX = 20*64;
             int maxY = 12*64;
             if (x < 0 || y < 0 || x > maxX || y > maxY) {
                 return 0; 
