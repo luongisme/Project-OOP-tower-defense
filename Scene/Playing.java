@@ -54,7 +54,7 @@ public class Playing extends GameScene implements SceneMethods{
         enemyManaging = new EnemyManaging(this);
         towerManager = new TowerManager(this);
         projectileManager = new ProjectileManager(this);
-        player = new Players(90); // Initialize player here
+        player = new Players(120); // Initialize player here
     }
 
 

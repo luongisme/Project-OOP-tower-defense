@@ -20,21 +20,21 @@ public class Constant {
 		public static int GetDefaultDamage(int towerType) {
 			switch(towerType){
 				case TOWER1:
-					return 30;
+					return 22;
 			}
 			return 0;
     	}
 		public static float GetDefaultRange(int towerType) {
 			switch(towerType){
 				case TOWER1:
-					return 150;
+					return 180;
 			}
 			return 0;
 		}
 		public static float GetDefaultCooldown(int towerType) {
 			switch(towerType){
 				case TOWER1:
-					return 30;
+					return 40;
 			}
 			return 0;
 		} 
@@ -75,11 +75,11 @@ public class Constant {
 		public static int GetReward(int enemyType) {
 			switch (enemyType) {
 			case SKELETON:
-				return 5;
+				return 3;
 			case BEATLE:
-				return 10;
+				return 6;
 			case ORC:
-				return 12;
+				return 10;
 			}
 			return 0;
 		}
