@@ -39,8 +39,9 @@ public class BottomBar {
 
         //button
         drawButtons(g);
+        g.setFont(new Font(null, Font.BOLD, 20));
         g.setColor(Color.black);
-        g.drawString("Lives: " + lives, 10, 790);
+        g.drawString("Lives: " + lives, 10, 860);
     }
        
         
