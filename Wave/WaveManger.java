@@ -1,11 +1,10 @@
 package Wave;
 
-import java.util.ArrayList;
-
 import Enemy.Beatle;
 import Enemy.GeneralEnemy;
 import Enemy.Orc;
 import Enemy.Skeleton;
+import java.util.ArrayList;
 
 public class WaveManger {
     private int[] waveEnemyCounts = {5, 10, 15, 20}; // 4 waves with increasing enemy counts
@@ -64,3 +63,4 @@ public class WaveManger {
         return currentWave;
     }
 }
+

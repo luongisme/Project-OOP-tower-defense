@@ -1,6 +1,7 @@
 package Main;
 
 
+import Scene.GameOver;
 import Scene.Menu;
 import Scene.Playing;
 import Scene.Settings;
@@ -22,7 +23,7 @@ public class Game extends JFrame implements Runnable {
         private Menu menu;
         private Playing playing;
         private Settings settings;
-
+        private GameOver gameOver;
     public Game(){
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,6 +41,7 @@ public class Game extends JFrame implements Runnable {
         menu = new Menu(this);
         playing = new Playing(this);
         settings = new Settings(this);
+        gameOver = new GameOver(this);
     }
 
 
@@ -107,6 +109,9 @@ public class Game extends JFrame implements Runnable {
     }
     public Settings getSettings(){
         return settings;
+    }
+    public GameOver getGameOver() {
+        return gameOver;
     }
 
     public TileManager getTileManager() {

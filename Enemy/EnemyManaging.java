@@ -5,7 +5,6 @@ import static HelperMethod.Constant.Tiles.ROAD_TILE;
 import HelperMethod.LoadImages;
 import Scene.Playing;
 import Wave.WaveManger;
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -39,6 +38,9 @@ import java.util.ArrayList;
                 e.move(e.getSpeed(), e.getLastDirection());
             }
             else if(isAtEnd(e)){
+                e.kill();
+                playing.removeOneLife();
+                
             }
             else{
                 setNewDirectionAndMove(e);
@@ -160,13 +162,5 @@ import java.util.ArrayList;
         public ArrayList<GeneralEnemy> getEnemies() {
             return wave.getEnemies();
         }
-        /* 
-        public void drawHealthBar(GeneralEnemy e, Graphics g){//draw health bar method
-            g.setColor(Color.red);
-            g.fillRect((int)e.getX() + 32 - (HPbarWidth / 2),(int)e.getY() - 10, HPbarWidth, 3);
-        }
-        public int getNewBarWidth(GeneralEnemy e) {
-            return (int) ((int) HPbarWidth * e.getHealthBarFloat());
-        }
-            */
+        
 }

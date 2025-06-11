@@ -253,5 +253,8 @@ public class Playing extends GameScene implements SceneMethods{
     public Players getPlayer() {
     return player;
     }
+    public void removeOneLife() {
+        BottomBar.removeOneLife();
+    }
     
 }

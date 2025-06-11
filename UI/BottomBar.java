@@ -1,9 +1,9 @@
 package UI;
 
+import Main.GameStates;
 import static Main.GameStates.MENU;
 import static Main.GameStates.SetGameState;
 import Scene.Playing;
-import Tile.Tile;
 import TowerM.Tower;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,6 +18,8 @@ public class BottomBar {
     //private ArrayList<MyButton> tileButtons = new ArrayList<>();
     private MyButton[] towerButtons;
     private Tower selectedTower;
+
+    private int lives = 1;
 // can you modify the bottom bar for me,need some update on the tower place
     public  BottomBar(int x, int y, int width, int height, Playing playing){
         this.x = x;
@@ -37,13 +39,10 @@ public class BottomBar {
 
         //button
         drawButtons(g);
-        //drawDisplayedTowerRange(g);
+        g.setColor(Color.black);
+        g.drawString("Lives: " + lives, 10, 790);
     }
-        // Draw the range of the displayed tower
-    public void drawDisplayedTowerRange(Graphics g) {
-            g.setColor(Color.BLACK);
-            g.drawOval(selectedTower.getX() + 32 - (int) selectedTower.getRange() / 2, selectedTower.getY() + 32 - (int) selectedTower.getRange() / 2, (int) (selectedTower.getRange() * 2), (int) (selectedTower.getRange() * 2));
-        }
+       
         
     private void initButtons() {
 
@@ -182,4 +181,15 @@ public class BottomBar {
         //for(MyButton b: tileButtons)
             b.resetBooleans();
     }
+
+    public int getLives() {
+        return lives;
+    }
+    public void removeOneLife(){
+        lives--;
+        if(lives <= 0){
+            SetGameState(GameStates.GAME_OVER);
+        }
+    }
+
 }

@@ -1,13 +1,6 @@
 package Main;
 
-import javax.imageio.ImageIO;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Render {
     private Game game;
@@ -25,6 +18,9 @@ public class Render {
                 break;
             case SETTINGS:
                 game.getSettings().render(g);
+                break;
+            case GAME_OVER:
+                game.getGameOver().render(g);
                 break;
         }
     }
