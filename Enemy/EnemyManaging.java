@@ -104,6 +104,11 @@ import java.util.ArrayList;
         }
 
         private int getTileType(int x, int y){
+            int maxX = 19*64;
+            int maxY = 12*64;
+            if (x < 0 || y < 0 || x > maxX || y > maxY) {
+                return 0; 
+            }
             return playing.getTileType(x, y);
         }
 
