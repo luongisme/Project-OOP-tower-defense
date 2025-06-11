@@ -32,19 +32,25 @@ public class ProjectileManager {
     public void update(){
         for(Projectile p : projectiles) {
             if(p.isActive()) {
+                p.move();
                 if(isProjectileHittingEnemy(p)) {
                     p.setActive(false);
-                } else {
-                    p.move();
+                    //playing.getEnemyManaging().damageEnemy(p.getTargetEnemy(), p.getDamage());
+                }else{
+                    //do nothing
                 }
             }
+            p.move();
         }
     }
     private boolean isProjectileHittingEnemy(Projectile p) {
         for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
             if(e.getHitBox().contains(p.getPosition())) {
                 e.hurt(p.getDamage());
-                return true; // Hit detected
+                if (!e.isAlive()) {
+                playing.getPlayer().earnMoney(e.getReward());
+            }
+            return true;
             }
         }
         return false; // No hit detected
@@ -76,7 +82,7 @@ public class ProjectileManager {
             ySpeed *= -1; // Adjust speed direction based on tower position
         }
 
-        projectiles.add(new Projectile(t.getX() , t.getY() , xSpeed, ySpeed, t.getDamage(), projectileID++, getProjectileType(t))); //type
+        projectiles.add(new Projectile(t.getX() + 16, t.getY() + 16, xSpeed, ySpeed, t.getDamage(), projectileID++, getProjectileType(t))); //type
     }
     private int getProjectileType(Tower t) {
         switch (t.getTowerType()) {
@@ -90,4 +96,4 @@ public class ProjectileManager {
 
 }
 
-
+    

@@ -5,6 +5,7 @@ import static HelperMethod.Constant.Enemies.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import Player.Players;
 
 public abstract class GeneralEnemy {
     private float x,y;
@@ -74,15 +75,16 @@ public abstract class GeneralEnemy {
         g.fillRect(barX+5, barY+15, currentBarWidth, barLength);
     }
 
-    public void receiveDamage(int damage){
-        this.isHit=true;
-        this.hp -=damage;
-        if(this.hp<=0){
-            this.isAlive=false;
-            this.hp=0;
+    public void receiveDamage(int damage) {
+        this.isHit = true;
+        this.hp -= damage;
+        if (this.hp <= 0) {
+            this.isAlive = false;
+            this.hp = 0;
+            
             System.out.println("Enemy died! HP: " + hp);
         }
-        barWidth -=4*damage;
+        barWidth -= 4 * damage;
     }
 
     public void setPos(int x, int y) {
@@ -91,7 +93,6 @@ public abstract class GeneralEnemy {
 	}
 
     public void move(float speed,int Direction){
-        //lastDirection=Direction;
         switch (Direction) {
             case LEFT:
                 this.x-=speed;
@@ -108,7 +109,6 @@ public abstract class GeneralEnemy {
         }
         updateHitBox();
     }
-    // get start health
     public void updateHitBox(){
         hitbox.x=(int)x;
         hitbox.y=(int)y;
@@ -135,6 +135,10 @@ public abstract class GeneralEnemy {
 
     public Rectangle getHitBox(){
         return hitbox;
+    }
+
+    public int getReward() {
+        return HelperMethod.Constant.Enemies.GetReward(id);
     }
 
     public int getHP(){

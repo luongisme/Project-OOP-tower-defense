@@ -19,7 +19,7 @@ public class Players {
     }
     
     public void drawMoney(Graphics g){
-        drawMoney(g);
+        drawMoneyAmount(g);
     }
 
     public void spendMoney(int amount){
@@ -29,4 +29,8 @@ public class Players {
     public void earnMoney(int amount){
         this.money+=amount;
     }
+    public int getMoney(){
+        return money;
+    }
+    
 }

@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
 public class TowerManager {
     private Playing playing;
     private BufferedImage [] towerImages;
@@ -68,8 +67,13 @@ public class TowerManager {
     }
      
     public void addTower(Tower selectedTower, int xPos, int yPos) {
-       towers.add(new Tower(xPos, yPos, towerAmount++, selectedTower.getTowerType()));
+        int cost = (int) HelperMethod.Constant.Towers.GetTowerCost(selectedTower.getTowerType());
+        if (playing.getPlayer().getMoney() >= cost) {
+            towers.add(new Tower(xPos, yPos, towerAmount++, selectedTower.getTowerType()));
+            playing.getPlayer().spendMoney(cost);
+        } else {
+            //do nothing
+        }
     }
 
-    
 }

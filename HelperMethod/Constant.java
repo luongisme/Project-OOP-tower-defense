@@ -38,6 +38,14 @@ public class Constant {
 			}
 			return 0;
 		} 
+		public static float GetTowerCost(int towerType){
+			switch (towerType) {
+				case TOWER1:
+					return 40;
+			}
+			return 0;
+		}
+
 }
     public static class Direction{
     public static final int LEFT=0;
@@ -67,11 +75,11 @@ public class Constant {
 		public static int GetReward(int enemyType) {
 			switch (enemyType) {
 			case SKELETON:
-				return 10;
+				return 5;
 			case BEATLE:
-				return 15;
+				return 10;
 			case ORC:
-				return 25;
+				return 12;
 			}
 			return 0;
 		}
