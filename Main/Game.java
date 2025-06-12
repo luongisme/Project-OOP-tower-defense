@@ -24,8 +24,8 @@ public class Game extends JFrame implements Runnable {
         private Playing playing;
         private Settings settings;
         private GameOver gameOver;
-    public Game(){
 
+    public Game(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         initClasses();
@@ -43,7 +43,6 @@ public class Game extends JFrame implements Runnable {
         settings = new Settings(this);
         gameOver = new GameOver(this);
     }
-
 
     private void start() {
         gameThread = new Thread(this){};

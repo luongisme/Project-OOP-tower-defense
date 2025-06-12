@@ -1,4 +1,4 @@
-package HelperMethod;
+package Input;
 
 public class Utilz {
     public static int GetHypoDistance(float x1, float y1, float x2, float y2) {

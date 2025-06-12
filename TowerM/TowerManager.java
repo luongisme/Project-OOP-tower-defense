@@ -43,7 +43,7 @@ public class TowerManager {
             }
         }
     private boolean isEnemyInRange(Tower t, GeneralEnemy e) {
-        int range = HelperMethod.Utilz.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+        int range = Input.Utilz.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
         return range < t.getRange();
     }
 

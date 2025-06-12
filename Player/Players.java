@@ -3,13 +3,24 @@ import java.awt.*;
 
 public class Players {
     private int money;
+    private static Players instance;
 
-    public Players(int money){
+    private Players(int money){
         this.money=money;
     }
 
-    //public boolean checkSurvive(){}
-    // when one enemy go past, you die
+    public static Players getInstance(int money){
+        if (instance == null){
+            instance= new Players(money);
+        }
+        return instance;
+    }
+
+    public static Players getInstance() {
+        return instance;
+    }
+
+
     public void drawMoneyAmount(Graphics g){
         int x=9*64;
         int y=25;
