@@ -1,15 +1,18 @@
 package Enemy;
 
+import static HelperMethod.Constant.Direction.*;
+import static HelperMethod.Constant.Enemies.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import static HelperMethod.Constant.Direction.*;
+import Player.Players;
 
-public class GeneralEnemy {
+public abstract class GeneralEnemy {
     private float x,y;
     protected int hp;
-    protected int speed;
-    protected boolean isAlive;
+    private int id;
+    protected float speed;
+    protected boolean isAlive = true;
     protected boolean isHit;
     protected boolean reachEnd;
     protected int lastDirection;
@@ -24,18 +27,24 @@ public class GeneralEnemy {
     protected int animationSpeed = 10; // Lower is faster
     protected int maxAnimationFrames = 10; // Set this to the number of frames per enemy
 
+    //private int maxhealth;
+    //private int health;
+
+
+
     public enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
 
     public static final int TILE_SIZE=64;
 
-    public GeneralEnemy(float x,float y){
+    public GeneralEnemy(float x,float y,int id){
+        this.id=id;
         this.x=x;
         this.y=y;
-        this.hp=10;
+        this.hp=GetStartHealth(id);
         this.lastDirection=1; // RIGHT
-        this.speed=1;
+        this.speed=GetSpeed(id);
         this.isAlive=true;
         this.isHit=false;
         this.reachEnd=false;
@@ -44,40 +53,41 @@ public class GeneralEnemy {
         this.firstDirection=Direction.RIGHT;//when the game start, the enemy set default to go right
     }
 
+
     public void drawHealthBar(Graphics g){//draw health bar method
         int barX=(int) x;
         int barY=(int) y-10;
-        barWidth=50;
+        int maxBarWidth = 50;
+        int currentBarWidth = (int) ((hp / (float)GetStartHealth(id)) * maxBarWidth);
 
-        
-        if(barWidth <= 30 && barWidth >= 20){
+        if(currentBarWidth <= 30 && currentBarWidth >= 20){
             g.setColor(Color.YELLOW);
         }
-        else if(barWidth <= 20 && barWidth >= 10){
+        else if(currentBarWidth <= 20 && currentBarWidth >= 10){
             g.setColor(Color.ORANGE);
         }
-        else if(barWidth <= 10 && barWidth>=0){
+        else if(currentBarWidth <= 10 && currentBarWidth>=0){
             g.setColor(Color.RED);
         }
         else{
             g.setColor(Color.GREEN);
         }
-        g.fillRect(barX+5, barY+15,barWidth,barLength);
+        g.fillRect(barX+5, barY+15, currentBarWidth, barLength);
     }
 
-    public void receiveDamage(int damage){
-        this.isHit=true;
-        this.hp -=damage;
-
-        if(this.hp<=0){
-            this.isAlive=false;
-            this.hp=0;
+    public void receiveDamage(int damage) {
+        this.isHit = true;
+        this.hp -= damage;
+        if (this.hp <= 0) {
+            this.isAlive = false;
+            this.hp = 0;
+            
+            System.out.println("Enemy died! HP: " + hp);
         }
-        barWidth -=4*damage;
+        barWidth -= 4 * damage;
     }
 
     public void setPos(int x, int y) {
-
 		this.x = x;
 		this.y = y;
 	}
@@ -97,11 +107,12 @@ public class GeneralEnemy {
                 this.y-=speed;
                 break;
         }
+        updateHitBox();
     }
-    // get start health
     public void updateHitBox(){
         hitbox.x=(int)x;
         hitbox.y=(int)y;
+
     }
 
     public boolean ReachedEnd(int[][] lvl){
@@ -126,6 +137,10 @@ public class GeneralEnemy {
         return hitbox;
     }
 
+    public int getReward() {
+        return HelperMethod.Constant.Enemies.GetReward(id);
+    }
+
     public int getHP(){
         return hp;
     }
@@ -142,8 +157,6 @@ public class GeneralEnemy {
         return lastDirection;
     }
 
-    
-
     public void updateAnimation() {
         animationTick++;
         if (animationTick >= animationSpeed) {
@@ -159,4 +172,34 @@ public class GeneralEnemy {
         return animationIndex;
     }
 
+    public void hurt(int damage) {
+        this.hp -= damage;
+        if (hp <= 0) {
+            isAlive = false;
+            hp = 0;
+            System.out.println("Enemy died! HP: " + hp);
+        }
+        this.isHit = true;
+    }
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public int getID(){
+        return id;
+    }
+    public float getSpeed() {
+        return speed;
+    }
+    /* 
+    public float getHealthBarFloat(){
+        return health/(float) maxhealth;
+    }
+    */
+    /* 
+    protected void setStartHealth(){
+        health = HelperMethod.Constant.Enemies.GetStartHealth(enemyType);
+        maxhealth = health;
+    }
+    */
 }

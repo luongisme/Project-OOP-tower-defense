@@ -33,6 +33,7 @@ public class Menu extends GameScene implements SceneMethods{
         int x = 1280 / 2 - w / 2;
         int y = 175;
         int yOffset = 200;
+        
         bPlaying = new MyButton("Play", x, y, w, h);
         bSettings = new MyButton("Settings", x, y + yOffset, w, h);
         bQuit = new MyButton("Quit", x, y + yOffset * 2, w, h);
@@ -47,6 +48,10 @@ public class Menu extends GameScene implements SceneMethods{
             // Scale the menu image to fit the panel size
             g.drawImage(menuImage, 0, 0, g.getClipBounds().width, g.getClipBounds().height, null);
         }
+        g.setFont(new Font(null, Font.BOLD, 30));
+        bPlaying.draw(g);
+        bSettings.draw(g);
+        bQuit.draw(g);
         drawButtons(g);
     }
 

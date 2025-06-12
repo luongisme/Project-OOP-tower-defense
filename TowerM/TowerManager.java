@@ -1,42 +1,80 @@
-/* package TowerM;
-
+package TowerM;
+import Enemy.GeneralEnemy;
+import HelperMethod.LoadImages;
 import Scene.Playing;
-import Tile.Tile;
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import HelperMethod.LoadSave;
-import Tower.Tower;
-import TowerM.Tower;
 import java.util.ArrayList;
 
 public class TowerManager {
     private Playing playing;
     private BufferedImage [] towerImages;
-    public ArrayList<Tower> towers = new ArrayList<>();
-    public Tile ARCHER;
+    private ArrayList<Tower> towers = new ArrayList<>(); // Use ArrayList to manage towers
+    private int towerAmount = 0; // Initialize tower amount
 
-    public TowerManager() {
+    public TowerManager(Playing playing) {
         this.playing = playing;
 
         loadTowerImages();
     }
 
-
     private void loadTowerImages() {
-        BufferedImage atlas=LoadSave.getSpriteAtlas();
-        towerImages = new BufferedImage[4];
-        towerImages[0]=LoadSave.getSpriteAtlas().getSubimage(0, 64*2, 64, 64);
-        towerImages[1]=LoadSave.getSpriteAtlas().getSubimage(64, 64, 64, 64);
-        towerImages[2]=LoadSave.getSpriteAtlas().getSubimage(64*2, 64, 64, 64);
-        towerImages[3]=LoadSave.getSpriteAtlas().getSubimage(64*3, 64, 64, 64);
+        BufferedImage atlas = LoadImages.getSpriteAtlas();
+        towerImages = new BufferedImage[1];
+        towerImages[0] = atlas.getSubimage(64*6, 64, 64, 64); 
     }
     public void update() {
-        // Update logic for towers can be added here
+        for (Tower t : towers) {
+            t.update();
+            attackEnemyIfClose(t);
+        }
     }
-    public void drawTowerImages(Tower tower, Graphics g) {
-        g.drawImage(towerImages[0], tower.getX(), tower.getY(), null);
+    private void attackEnemyIfClose(Tower t) {
+            for(GeneralEnemy e : playing.getEnemyManaging().getEnemies()) {
+                if(e.isAlive())
+                    if(isEnemyInRange(t, e)) {
+                        if(t.isCoolDownOver()) {
+                            playing.shootEnemy(t, e); 
+                            t.resetCooldown();
+                    } else{
+                        //do nothing
+                    }
+                }
+            }
+        }
+    private boolean isEnemyInRange(Tower t, GeneralEnemy e) {
+        int range = HelperMethod.Utilz.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+        return range < t.getRange();
     }
 
+    public void draw(Graphics g) {
+        for (Tower t : towers) {
+            g.drawImage(towerImages[t.getTowerType()], t.getX(), t.getY(), null); 
+        }
+    }
+    
+    public BufferedImage[] getTowerImages(){
+            return towerImages;
+    }
+    
+     public Tower getTowerAt(int x, int y) {
+        for(Tower t : towers) {
+            if(t.getX() == x && t.getY() == y) {
+                return t;
+            }
+        }
+        return null;
+    }
+     
+    public void addTower(Tower selectedTower, int xPos, int yPos) {
+        int cost = (int) HelperMethod.Constant.Towers.GetTowerCost(selectedTower.getTowerType());
+        if (playing.getPlayer().getMoney() >= cost) {
+            towers.add(new Tower(xPos, yPos, towerAmount++, selectedTower.getTowerType()));
+            playing.getPlayer().spendMoney(cost);
+        } else {
+            //do nothing
+        }
+    }
+
+
 }
-*/

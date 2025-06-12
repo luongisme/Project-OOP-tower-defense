@@ -8,17 +8,19 @@ public class Tile {
     private String name;
     private boolean canPlaceTower;
 
-    public Tile(BufferedImage sprite, int id, int tileType) {
+    public Tile(BufferedImage sprite, int id, int tileType,boolean canPlaceTower) {
         this.sprite = new BufferedImage[1];
         this.sprite[0]=sprite;
         this.id = id;
         this.tileType=tileType;
+        this.canPlaceTower=canPlaceTower;
     }
 
-    public Tile(BufferedImage[] sprite, int id, int tileType){
+    public Tile(BufferedImage[] sprite, int id, int tileType,boolean canPlaceTower){
         this.sprite=sprite;
         this.id=id;
         this.tileType=tileType;
+        this.canPlaceTower=canPlaceTower;
     }
 
     //this work as a slide that transition from picture to picture of an object

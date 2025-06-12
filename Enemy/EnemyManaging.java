@@ -1,41 +1,52 @@
 package Enemy;
-    import Scene.Playing;
-    import Enemy.GeneralEnemy;
-    import HelperMethod.LoadSave;
-    import static HelperMethod.Constant.Direction.*;
-    import static HelperMethod.Constant.Tiles.ROAD_TILE;
-
-    import java.awt.Graphics;
-    import java.awt.image.BufferedImage;
-    import java.util.ArrayList;
+import static HelperMethod.Constant.Direction.*;
+import static HelperMethod.Constant.Enemies.*;
+import static HelperMethod.Constant.Tiles.HOME_TILE;
+import static HelperMethod.Constant.Tiles.ROAD_TILE;
+import HelperMethod.LoadImages;
+import Scene.Playing;
+import Wave.WaveManger;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import Main.GameStates;
 
     public class EnemyManaging {
         private Playing playing;
         private BufferedImage[][] enemyImages; // [enemyType][frame]
-        ArrayList<GeneralEnemy> enemies=new ArrayList<>();
-        private float speed=0.6f;
+        private WaveManger wave;
 
         public EnemyManaging(Playing playing){
             this.playing=playing;
             enemyImages= new BufferedImage[4][10]; // 4 enemy types, 10 frames each
-            addEnemy();
+            wave = new WaveManger();
             loadEnemyImages();
         }
 
         public void update(){
-            for (GeneralEnemy e:enemies ){
-                e.updateAnimation(); // update animation frame
-                isNextTileRoad(e);
+            wave.update();
+            for (GeneralEnemy e : wave.getEnemies()) {
+                if(e.isAlive){                    
+                    e.updateAnimation(); // update animation frame
+                    isNextTileRoad(e);
+                }
             }
         }   
 
         public void isNextTileRoad(GeneralEnemy e){
-            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection()));
-            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection()));
+            int newX = (int) (e.getX() + getSpeedX(e.getLastDirection(), e));
+            int newY = (int) (e.getY() + getSpeedY(e.getLastDirection(), e));
+            if  (getTileType(newX, newY)==HOME_TILE){
+                GameStates.SetGameState(GameStates.GAME_OVER);
+                return;
+            }
             if  (getTileType(newX, newY) == ROAD_TILE){
-                e.move(speed, e.getLastDirection());
+                e.move(e.getSpeed(), e.getLastDirection());
             }
             else if(isAtEnd(e)){
+                e.kill();
+                playing.removeOneLife();
+                
             }
             else{
                 setNewDirectionAndMove(e);
@@ -52,27 +63,27 @@ package Enemy;
             // Try all directions to find a valid road tile
 
             if (direction == LEFT || direction == RIGHT) {
-                int newY = (int) (e.getY() + getSpeedY(UP));
+                int newY = (int) (e.getY() + getSpeedY(UP, e));
 
                 if (getTileType((int) e.getX(), newY) == ROAD_TILE) {
-                    e.move(speed, UP);
+                    e.move(e.getSpeed(), UP);
                     e.lastDirection = UP;
 
-                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN))) == ROAD_TILE) {
-                    e.move(speed, DOWN);
+                } else if (getTileType((int) e.getX(), (int) (e.getY() + getSpeedY(DOWN, e))) == ROAD_TILE) {
+                    e.move(e.getSpeed(), DOWN);
                     e.lastDirection = DOWN;
 
                 }
             } else {
 
-                int newX = (int) (e.getX() + getSpeedX(RIGHT));
+                int newX = (int) (e.getX() + getSpeedX(RIGHT, e));
 
                 if (getTileType(newX, (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, RIGHT);
+                    e.move(e.getSpeed(), RIGHT);
                     e.lastDirection = RIGHT;
 
-                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT)), (int) e.getY()) == ROAD_TILE) {
-                    e.move(speed, LEFT);
+                } else if (getTileType((int) (e.getX() + getSpeedX(LEFT, e)), (int) e.getY()) == ROAD_TILE) {
+                    e.move(e.getSpeed(), LEFT);
                     e.lastDirection = LEFT;
 
                 }
@@ -99,29 +110,48 @@ package Enemy;
         }
 
         private int getTileType(int x, int y){
+            int maxX = 20*64;
+            int maxY = 12*64;
+            if (x < 0 || y < 0 || x > maxX || y > maxY) {
+                return 0; 
+            }
             return playing.getTileType(x, y);
         }
 
-        private float getSpeedX(int direction){
-            if (direction == LEFT) return -speed;
-            if (direction == RIGHT) return speed+64;
+        private float getSpeedX(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == LEFT) return -s;
+            if (direction == RIGHT) return s+64;
             return 0;
         }
 
-        private float getSpeedY(int direction){
-            if (direction == UP) return -speed;
-            if (direction == DOWN) return speed+64;
+        private float getSpeedY(int direction, GeneralEnemy e){
+            float s = e.getSpeed();
+            if (direction == UP) return -s;
+            if (direction == DOWN) return s+64;// this help fixing the offset problem
             return 0;
         }
 
-        public void addEnemy(){
-            enemies.add(new GeneralEnemy(0,64*11));// the enemy doesnt walk right on the path so i did a little adjustment
+        public void addEnemy(int enemyType){
+            switch (enemyType) {
+                case SKELETON:
+                    wave.getEnemies().add(new Skeleton(0,64*11,SKELETON));
+                    break;
+                case BEATLE:
+                    wave.getEnemies().add(new Beatle(0,64*11,BEATLE));
+                    break;
+                case ORC:
+                    wave.getEnemies().add(new Orc(0,64*11,ORC));
+                    break;
+            }
         }
 
         public void draw(Graphics g){
-            for (GeneralEnemy e: enemies){
-                drawEnemyImages(e, g);
-                e.drawHealthBar(g);
+            for (GeneralEnemy e: wave.getEnemies()){
+                if(e.isAlive){
+                    drawEnemyImages(e, g);
+                    e.drawHealthBar(g);
+                }
             }
         }
 
@@ -129,16 +159,19 @@ package Enemy;
             //  load 10 frames for each enemy type 
             for (int type = 0; type < 4; type++) {
                 for (int frame = 0; frame < 10; frame++) {
-                    enemyImages[type][frame] = LoadSave.getSpriteAtlas().getSubimage(64 * frame, 64 * (2 + type * 5), 64, 64);
+                    enemyImages[type][frame] = LoadImages.getSpriteAtlas().getSubimage(64 * frame, 64 * (2 + type * 5), 64, 64);
                 }
             }
         }
 
         public void drawEnemyImages(GeneralEnemy e, Graphics g){
-            // For now always use type 0,1,3 
-            int type = 0;
+            int type = e.getID();
             int frame = e.getAnimationIndex();
             g.drawImage(enemyImages[type][frame], (int)e.getX(), (int)e.getY(), null);
         }
 
+        public ArrayList<GeneralEnemy> getEnemies() {
+            return wave.getEnemies();
+        }
+        
 }
